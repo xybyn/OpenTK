@@ -19,8 +19,8 @@ namespace Common
     {
         private float _phi = -90;
         private float _ksi = 0;
-        private mat4 _projection;
-        private mat4 _view;
+        protected mat4 _projection;
+        protected mat4 _view;
         protected vec3 _position;
         private Vector2 _lastPos;
         private float _distanceToTarget = 10;

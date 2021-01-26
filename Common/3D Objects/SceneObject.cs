@@ -18,7 +18,7 @@ namespace OpenTKProject
             }
         }
         
-        public Material Material { get; protected set; }
+        public virtual Material Material { get; set; }
 
         public bool IsShowingNormals { get; set; }
 
