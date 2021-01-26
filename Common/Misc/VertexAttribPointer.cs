@@ -1,15 +1,15 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 
-namespace Common
+namespace Common.Misc
 {
     public class VertexAttribPointer
     {
-        public int Index { get; set; }
-        public int Size { get; set; }
-        public VertexAttribPointerType Type { get; set; }
-        public bool Normalize { get; set; }
-        public int StrideInBytes { get; set; }
-        public int OffsetInBytes { get; set; }
+        public int Index { get; init; }
+        public int Size { get; init; }
+        public VertexAttribPointerType Type { get; init; }
+        public bool Normalize { get; init; }
+        public int StrideInBytes { get; init; }
+        public int OffsetInBytes { get; init; }
 
         public void Enable()
         {

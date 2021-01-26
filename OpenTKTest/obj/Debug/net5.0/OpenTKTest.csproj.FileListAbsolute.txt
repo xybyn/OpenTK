@@ -52,3 +52,5 @@ C:\Users\Nikita\source\repos\OpenTKTest\OpenTKTest\bin\Debug\net5.0\Shaders\3D\d
 C:\Users\Nikita\source\repos\OpenTKTest\OpenTKTest\bin\Debug\net5.0\Shaders\3D\collider.frag
 C:\Users\Nikita\source\repos\OpenTKTest\OpenTKTest\bin\Debug\net5.0\Shaders\3D\collider.vert
 C:\Users\Nikita\source\repos\OpenTKTest\OpenTKTest\bin\Debug\net5.0\GlmSharp.dll
+C:\Users\Nikita\source\repos\OpenTKTest\OpenTKTest\bin\Debug\net5.0\Shaders\3D\parametricFunction.frag
+C:\Users\Nikita\source\repos\OpenTKTest\OpenTKTest\bin\Debug\net5.0\Shaders\3D\parametricFunction.vert

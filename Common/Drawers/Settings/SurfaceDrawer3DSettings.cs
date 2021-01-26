@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace Common.Drawers.Settings
 {
     public class SurfaceDrawer3DSettings
     {

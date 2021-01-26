@@ -1,124 +1,113 @@
-﻿// unset
-
-using Common.Colliders;
+﻿using Common.Colliders;
+using Common.Interfaces;
 using GlmNet;
-using OpenTK.Graphics.OpenGL4;
 using OpenTK.Windowing.Common;
-using OpenTKProject;
 using System;
 using System.Collections.Generic;
-
-namespace Common
+//TODO: сделать полностью рабочим и сделать демонстрацию
+namespace Common._3D_Objects
 {
-    public class AxisManipulator : SceneObject, IRayCasting
+    public class AxisManipulator : SceneObject3D, IRayCasting
     {
-        private SceneObject x;
-        private SceneObject y;
-        private SceneObject z;
-        private Collider xCollider;
-        private Collider yCollider;
-        private Collider zCollider;
-        private Sphere sphere;
-        private List<SceneObject> toDraw = new();
-        private List<Collider> _colliders = new();
+        private readonly List<Collider> _colliders = new();
 
-        private bool locked = true;
-        
-        public void OnMouseMove(MouseMoveEventArgs e, bool isPressed)
-        {
-            if (isPressed)
-            {
-                Console.WriteLine(axis);
-                if (axis.Equals("x"))
-                    {
-                        TranslateGlobal(Pos+new vec3(-e.DeltaX/70f, 0, 0));
-                    }else if (axis.Equals("y"))
-                    {
-                        TranslateGlobal(Pos+new vec3(0, -e.DeltaY/70f, 0));
-                    }
-                    else if (axis.Equals("z"))
-                    {
-                        TranslateGlobal(Pos+new vec3(0, 0, -e.DeltaX/70f));
-                    }
-            }
-            else
-            {
-                axis = string.Empty;
-            }
-            
-        }
-        string axis = String.Empty;
+        private string _axis = String.Empty;
+
+        private bool _locked = true;
+        private readonly List<SceneObject3D> _toDraw = new();
+
+        private const float HEIGHT = 1;
+
         public AxisManipulator()
         {
             float height = 1;
             float offset = height / 2;
-            var radius = 0.03f;
-            sphere = new Sphere(new vec3(0, 0, 0), radius + 0.02f);
+            float radius = 0.03f;
+            Sphere sphere = new Sphere(radius + 0.02f);
+            sphere.TranslateWorld(new vec3(0, 0, 0));
             sphere.AttachTo(this);
 
-            x = new Vector3D("x", new vec3(0.8f, 0, 0));
+            SceneObject3D x = new Vector3D("x");
             x.AttachTo(this);
-            x.Rotate(MathF.PI / 2, new vec3(0, 0, 1));
+            x.RotateLocal(MathF.PI / 2, new vec3(0, 0, 1));
             x.Material.Color = new vec3(0.5f, 0, 0);
-            x.TranslateGlobal(new vec3(offset, 0, 0));
-            xCollider = new BoxCollider();
-            xCollider.Scale(new vec3(0.1f, 1, 0.1f));
+            x.TranslateWorld(new vec3(offset, 0, 0));
+            Collider xCollider = new BoxCollider();
+            xCollider.ScaleWorld(new vec3(0.1f, 1, 0.1f));
             xCollider.AttachTo(x);
 
-            y = new Vector3D("y", new vec3(0, 0.8f, 0));
-            y.TranslateGlobal(new vec3(0, offset, 0));
+            SceneObject3D y = new Vector3D("y");
+            y.TranslateWorld(new vec3(0, offset, 0));
             y.Material.Color = new vec3(0, 0.5f, 0);
             y.AttachTo(this);
-            yCollider = new BoxCollider();
-            yCollider.Scale(new vec3(0.1f, 1, 0.1f));
+            Collider yCollider = new BoxCollider();
+            yCollider.ScaleWorld(new vec3(0.1f, 1, 0.1f));
             yCollider.AttachTo(y);
 
-            z = new Vector3D("z", new vec3(0, 0, 0.8f));
-            z.Rotate(MathF.PI / 2, new vec3(1, 0, 0));
-            z.TranslateGlobal(new vec3(0, 0, offset));
+            SceneObject3D z = new Vector3D("z");
+            z.RotateLocal(MathF.PI / 2, new vec3(1, 0, 0));
+            z.TranslateWorld(new vec3(0, 0, offset));
             z.Material.Color = new vec3(0, 0, 0.5f);
             z.AttachTo(this);
-            zCollider = new BoxCollider();
-            zCollider.Scale(new vec3(0.1f, 1, 0.1f));
+            Collider zCollider = new BoxCollider();
+            zCollider.ScaleWorld(new vec3(0.1f, 1, 0.1f));
             zCollider.AttachTo(z);
 
             _colliders.Add(xCollider);
             _colliders.Add(yCollider);
             _colliders.Add(zCollider);
 
-            toDraw.Add(sphere);
-            toDraw.Add(x);
-            toDraw.Add(y);
-            toDraw.Add(z);
-            /*toDraw.Add(xCollider);
-            toDraw.Add(yCollider);
-            toDraw.Add(zCollider);*/
-        }
-
-        public override void Draw(ref mat4 view, ref mat4 projection)
-        {
-            foreach (SceneObject sceneObject in toDraw)
-            {
-                sceneObject.Draw(ref view, ref projection);
-            }
+            _toDraw.Add(sphere);
+            _toDraw.Add(x);
+            _toDraw.Add(y);
+            _toDraw.Add(z);
         }
 
         public void CheckCollision(vec3 ray, vec3 cameraPosition)
         {
-
-            foreach (var collider in _colliders)
+            foreach (Collider collider in _colliders)
             {
-                if (collider.IntersectsRay(ray, cameraPosition, out var result))
+                if (collider.IntersectsRay(ray, cameraPosition, out float result))
                 {
-
-                    var axisname = ((Vector3D)collider.Parent).AxisName;
-                    axis = axisname;
+                    string axisname = ((Vector3D)collider.Parent).AxisName;
+                    _axis = axisname;
 
                     return;
                 }
-  
             }
-            axis = String.Empty;
+            _axis = String.Empty;
+        }
+
+        public void OnMouseMove(MouseMoveEventArgs e, bool isPressed)
+        {
+            if (isPressed)
+            {
+                Console.WriteLine(_axis);
+                if (_axis.Equals("x"))
+                {
+                    TranslateWorld(WorldPosition + new vec3(-e.DeltaX / 70f, 0, 0));
+                }
+                else if (_axis.Equals("y"))
+                {
+                    TranslateWorld(WorldPosition + new vec3(0, -e.DeltaY / 70f, 0));
+                }
+                else if (_axis.Equals("z"))
+                {
+                    TranslateWorld(WorldPosition + new vec3(0, 0, -e.DeltaX / 70f));
+                }
+            }
+            else
+            {
+                _axis = string.Empty;
+            }
+        }
+
+        public override void Draw(ref mat4 view, ref mat4 projection)
+        {
+            foreach (SceneObject3D sceneObject in _toDraw)
+            {
+                sceneObject.Draw(ref view, ref projection);
+            }
         }
     }
 }

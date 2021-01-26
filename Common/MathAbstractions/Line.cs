@@ -2,7 +2,7 @@
 
 using GlmNet;
 
-namespace Common
+namespace Common.MathAbstractions
 {
     public class Line
     {

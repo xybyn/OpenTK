@@ -1,36 +1,44 @@
-﻿using GlmNet;
-using OpenTK.Graphics.OpenGL4;
-using OpenTKProject;
+﻿// unset
+
+using Common._3D_Objects;
+using GlmNet;
 using System.Collections.Generic;
 using static System.MathF;
 
 namespace Common
 {
-    public sealed class Sphere : SceneObject
+    public sealed class Sphere : SceneObject3D
     {
-        private List<vec3> _vertices = new();
-        private List<vec3> _normals = new();
-        private List<uint> _indices = new();
+        private readonly List<uint> _indices = new();
+        private readonly List<vec3> _normals = new();
+        private readonly List<vec3> _vertices = new();
+
+        public Sphere(float radius, int sectorCount = 20, int stackCount = 20)
+        {
+            CalculateVerticesAndNormals(sectorCount, stackCount, radius);
+            CalculateIndices(sectorCount, stackCount);
+            InitializeVAO_VBO_EBO(_vertices, _normals, _indices);
+        }
 
         private void CalculateVerticesAndNormals(int sectorCount, int stackCount, float r)
         {
-            float sectorStep = 2 * PI / sectorCount;
+            var sectorStep = 2 * PI / sectorCount;
 
-            float stackStep = PI / stackCount;
-            float phi = 0;
+            var stackStep = PI / stackCount;
+            var phi = 0;
             float xy;
             float z;
             float x, y;
             float nx, ny, nz;
             float stackAngle, sectorAngle;
-            float lengthInv = 1.0f / r;
-            for (int i = 0; i <= sectorCount; i++)
+            var lengthInv = 1.0f / r;
+            for (var i = 0; i <= sectorCount; i++)
             {
                 stackAngle = (PI / 2) - (i * stackStep); // starting from pi/2 to -pi/2
                 xy = r * Cos(stackAngle); // r * cos(u)
                 z = r * Sin(stackAngle); // r * sin(u)
 
-                for (int j = 0; j <= sectorCount; ++j)
+                for (var j = 0; j <= sectorCount; ++j)
                 {
                     sectorAngle = j * sectorStep; // starting from 0 to 2pi
 
@@ -45,42 +53,32 @@ namespace Common
             }
         }
 
-
         private void CalculateIndices(int sectorCount, int stackCount)
         {
-            int k1, k2;
-            for (int i = 0; i < stackCount; ++i)
+            for (var i = 0; i < stackCount; ++i)
             {
-                k1 = (i * (sectorCount + 1)); // beginning of current stack
-                k2 = (k1 + sectorCount + 1); // beginning of next stack
+                var k1 = i * (sectorCount + 1);
+                var k2 = k1 + sectorCount + 1;
 
-                for (int j = 0; j < sectorCount; ++j, ++k1, ++k2)
+                for (var j = 0; j < sectorCount; ++j, ++k1, ++k2)
                 {
                     if (i != 0)
                     {
                         _indices.Add((uint)k1);
-                        _indices.Add((uint)(k2));
+                        _indices.Add((uint)k2);
                         _indices.Add((uint)k1 + 1);
                     }
 
                     // k1+1 => k2 => k2+1
-                    if (i != stackCount - 1)
+                    if (i == stackCount - 1)
                     {
-                        _indices.Add((uint)k1 + 1);
-                        _indices.Add((uint)k2);
-                        _indices.Add((uint)k2 + 1);
+                        continue;
                     }
+                    _indices.Add((uint)k1 + 1);
+                    _indices.Add((uint)k2);
+                    _indices.Add((uint)k2 + 1);
                 }
             }
-        }
-
-        public Sphere(vec3 position, float radius, int sectorCount = 20, int stackCount = 20)
-        {
-            
-            CalculateVerticesAndNormals(sectorCount, stackCount, radius);
-            CalculateIndices(sectorCount, stackCount);
-            TranslateGlobal(position);
-            InitializeVAO_VBO_EBO(_vertices, _normals, _indices);
         }
     }
 }

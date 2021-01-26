@@ -1,21 +1,24 @@
 ﻿// unset
 
+using Common._3D_Objects;
 using GlmNet;
-using OpenTKProject;
+using OpenTK.Mathematics;
 
 namespace Common
 {
-    public class Vector3D : SceneObject
+    public class Vector3D : SceneObject3D
     {
-        private Cylinder _cylinder;
-        public string AxisName { get; }
-        public Vector3D(string axisName, vec3 color)
+        private readonly Cylinder _cylinder;
+        private const float CYLINDER_RADIUS = 0.05f;
+        private const float CYLINDER_HEIGHT = 1;
+        public Vector3D(string axisName)
         {
             AxisName = axisName;
-            _cylinder = new Cylinder(0.05f, 1);
+            _cylinder = new Cylinder(CYLINDER_RADIUS, CYLINDER_HEIGHT);
             _cylinder.AttachTo(this);
-            _cylinder.Material.Color = color;
+            _cylinder.Material = Material;
         }
+        public string AxisName { get; }
 
         public override void Draw(ref mat4 view, ref mat4 projection)
         {

@@ -1,8 +1,12 @@
-﻿using GlmNet;
+﻿using Common.Buffers;
+using Common.MathAbstractions;
+using Common.Misc;
+using Common.Shaders;
+using GlmNet;
 using OpenTK.Graphics.OpenGL4;
 using System;
 
-namespace Common
+namespace Common.Drawers
 {
     public class Line3D
     {

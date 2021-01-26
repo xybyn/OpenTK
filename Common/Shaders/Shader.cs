@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace Common
+namespace Common.Shaders
 {
     public class Shader
     {
@@ -95,6 +95,7 @@ namespace Common
             int location = GL.GetUniformLocation(_handle, value);
             GL.UniformMatrix4(location, 1, false, mat.to_array());
         }
+
         public void SetVec3(string value, ref vec3 vec)
         {
             Use();
@@ -123,8 +124,6 @@ namespace Common
 
             _disposedValue = true;
         }
-
-
 
         public void Dispose()
         {

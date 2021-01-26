@@ -1,17 +1,17 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using Common.Interfaces;
+using Common.Misc;
+using OpenTK.Graphics.OpenGL4;
 using System.Collections.Generic;
 
-namespace Common
+namespace Common.Buffers
 {
     public class VAO : IOpenGLUnit
     {
-        public int ProgramID => _program;
-
-        private readonly int _program;
+        public int ProgramID { get; }
 
         public VAO(VBO vbo, EBO ebo, IEnumerable<VertexAttribPointer> attribPointers)
         {
-            _program = GL.GenVertexArray();
+            ProgramID = GL.GenVertexArray();
 
             Bind();
             vbo.Bind();
@@ -24,17 +24,17 @@ namespace Common
 
         public void Bind()
         {
-            GL.BindVertexArray(_program);
+            GL.BindVertexArray(ProgramID);
         }
 
         public void Free()
         {
-            GL.DeleteVertexArray(_program);
+            GL.DeleteVertexArray(ProgramID);
         }
 
         public VAO(VBO vbo, IEnumerable<VertexAttribPointer> attribPointers)
         {
-            _program = GL.GenVertexArray();
+            ProgramID = GL.GenVertexArray();
 
             Bind();
             vbo.Bind();

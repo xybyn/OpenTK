@@ -14,6 +14,21 @@ namespace Utils
 
             return factorial;
         }
+        public static List<float> GetCircle(float r, int sectorCount)
+        {
+            float sectorStep = 2 * PI / sectorCount;
+            float sectorAngle; // radian
+
+            List<float> unitCircleVertices = new();
+            for (int i = 0; i <= sectorCount; ++i)
+            {
+                sectorAngle = i * sectorStep;
+                unitCircleVertices.Add(r * Cos(sectorAngle)); // x
+                unitCircleVertices.Add(0); // z
+                unitCircleVertices.Add(r * Sin(sectorAngle)); // y
+            }
+            return unitCircleVertices;
+        }
 
         public static vec3 Bezier(float t, List<vec3> points)
         {
@@ -120,7 +135,5 @@ namespace Utils
             }
             return pascal[n][k];
         }
-        
-        
     }
 }

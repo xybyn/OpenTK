@@ -16,7 +16,6 @@ namespace Common
         private List<vec3> points = new();
         public BezierCurve3D(List<vec3> points)
         {
-            
         }
 
         private readonly List<vec3> points = new List<vec3>();

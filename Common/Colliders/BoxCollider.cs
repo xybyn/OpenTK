@@ -1,17 +1,15 @@
 ﻿// unset
 
-using Common.Colliders;
 using GlmNet;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using static System.MathF;
 
-namespace Common
+namespace Common.Colliders
 {
     public class BoxCollider : Collider
     {
         private List<PlaneCollider> _planeColliders = new List<PlaneCollider>();
+
         public BoxCollider()
         {
             _planeColliders.Add(new PlaneCollider(new vec3(0, 1, 0), new vec3(0, 0.5f, 0)));

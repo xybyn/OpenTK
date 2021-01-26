@@ -2,12 +2,11 @@
 
 using GlmNet;
 
-namespace Common
+namespace Common.MathAbstractions
 {
     public class Plane
     {
-        private vec3 _normal;
-        public vec3 Normal { get; set; }
+        public vec3 Normal { get; init; }
         public vec3 D { get; set; }
 
         public vec3 Intersect(Line line)

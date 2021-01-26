@@ -3,7 +3,7 @@
 using GlmNet;
 using System.Collections.Generic;
 
-namespace Common
+namespace Common.Extensions
 {
     public static class ListVector3Extension
     {

@@ -2,7 +2,7 @@
 
 using GlmNet;
 
-namespace Common
+namespace Common.Interfaces
 {
     public interface IRayCasting
     {

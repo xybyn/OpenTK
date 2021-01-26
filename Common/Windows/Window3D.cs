@@ -1,51 +1,48 @@
 ﻿using Common._3D_Objects;
-using Common.Colliders;
+using Common.Interfaces;
 using GlmNet;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using OpenTKProject;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Utils;
 using static System.MathF;
 
-namespace Common
+namespace Common.Windows
 {
     public abstract class Window3D : WindowBase
     {
         private float _phi = -90;
         private float _ksi = 0;
-        protected mat4 _projection;
-        protected mat4 _view;
-        protected vec3 _position;
+        protected mat4 projection;
+        protected mat4 view;
+        protected vec3 position;
         private Vector2 _lastPos;
         private float _distanceToTarget = 10;
-        public readonly List<SceneObject> ToDraw = new();
+        protected readonly List<SceneObject3D> toDraw = new();
         private readonly List<IRayCasting> _rayCastings = new();
 
         private event Action<MouseMoveEventArgs, bool> OnMouseMoveEvent;
-        private event Action<MouseButtonEventArgs> OnMousePressed; 
-        public Window3D(
+
+        private event Action<MouseButtonEventArgs> OnMousePressed;
+
+        protected Window3D(
             GameWindowSettings gameWindowSettings,
             NativeWindowSettings nativeWindowSettings)
             : base(gameWindowSettings,
                 nativeWindowSettings)
         {
-            
-          
         }
 
-        public void AddMainCoordinatesAxis()
+        protected void AddMainCoordinatesAxis()
         {
             var mainAxis = new Axis();
-            ToDraw.Add(mainAxis);
+            toDraw.Add(mainAxis);
         }
 
-        public void AddGrid(int horizontalDivisions=21, int verticalDivisions=21)
+        protected void AddGrid(int horizontalDivisions = 21, int verticalDivisions = 21)
         {
             var grid = new Grid3D(horizontalDivisions, verticalDivisions)
             {
@@ -55,13 +52,13 @@ namespace Common
                 }
             };
 
-            ToDraw.Add(grid);
+            toDraw.Add(grid);
         }
 
         protected override void OnLoad()
         {
             base.OnLoad();
-            _projection = glm.perspective(45f, 4f / 3f, 0.1f, 100f);
+            projection = glm.perspective(45f, 4f / 3f, 0.1f, 100f);
         }
 
         protected override void OnMouseUp(MouseButtonEventArgs e)
@@ -86,11 +83,11 @@ namespace Common
         private void Pick(float mouseX, float mouseY)
         {
             var ray = Physics3D.Physics3D.ScreenPointToWorldRay(new vec2(mouseX, mouseY),
-                new vec2(Size.X, Size.Y), _projection, _view);
+                new vec2(Size.X, Size.Y), projection, view);
 
             foreach (IRayCasting rayCasting in _rayCastings)
             {
-                rayCasting.CheckCollision(ray, _position);
+                rayCasting.CheckCollision(ray, position);
             }
         }
 
@@ -102,22 +99,20 @@ namespace Common
                 _phi -= (_lastPos.X - current.X) * 0.1f;
                 _ksi -= (_lastPos.Y - current.Y) * 0.1f;
             }
-            _position.x = _distanceToTarget * Cos(glm.radians(_ksi)) * Cos(glm.radians(_phi));
-            _position.z = _distanceToTarget * Cos(glm.radians(_ksi)) * Sin(glm.radians(_phi));
-            _position.y = _distanceToTarget * Sin(glm.radians(_ksi));
-            _view = glm.lookAt(_position, new vec3(0, 0, 0), new vec3(0, 1, 0));
-
+            position.x = _distanceToTarget * Cos(glm.radians(_ksi)) * Cos(glm.radians(_phi));
+            position.z = _distanceToTarget * Cos(glm.radians(_ksi)) * Sin(glm.radians(_phi));
+            position.y = _distanceToTarget * Sin(glm.radians(_ksi));
+            view = glm.lookAt(position, new vec3(0, 0, 0), new vec3(0, 1, 0));
 
             var vec = new vec3(
-                glm.inverse(_view) * new vec4(new vec3(MousePosition.X / 800, MousePosition.Y / 600, -5),
+                glm.inverse(view) * new vec4(new vec3(MousePosition.X / 800, MousePosition.Y / 600, -5),
                     1));
             _lastPos = current;
-            var sp = new vec3(_projection * _view * new vec4(new vec3(4, 0, 0), 1));
+            var sp = new vec3(projection * view * new vec4(new vec3(4, 0, 0), 1));
             var right = new vec3(1, 0, 0);
 
             base.OnUpdateFrame(args);
         }
-
 
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
@@ -129,9 +124,9 @@ namespace Common
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            foreach (var d in ToDraw)
+            foreach (var d in toDraw)
             {
-                d.Draw(ref _view, ref _projection);
+                d.Draw(ref view, ref projection);
             }
             Context.SwapBuffers();
             base.OnRenderFrame(args);

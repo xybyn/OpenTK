@@ -1,24 +1,29 @@
 ﻿// unset
 
+using Common._3D_Objects;
+using Common.Drawers.Settings;
+using Common.Extensions;
+using Common.Shaders;
 using GlmNet;
 using OpenTK.Graphics.OpenGL4;
-using OpenTKProject;
 using System;
 using System.Collections.Generic;
 
-namespace Common
+namespace Common.Drawers
 {
-    public class ParametricFunctionDrawer3D : SceneObject
+    public class ParametricFunctionDrawer3D : SceneObject3D
     {
         private ParametricFunctionDrawerSettings _settings;
         private List<vec3> vertices = new();
         private List<uint> indices = new();
+
         public ParametricFunctionDrawer3D(Func<float, vec3> func, ParametricFunctionDrawerSettings settings)
         {
             _settings = settings;
             shader = new Shader(@"Shaders\3D\parametricFunction.vert", @"Shaders\3D\parametricFunction.frag");
             SetFunction(func);
         }
+
         public void SetFunction(Func<float, vec3> func)
         {
             vertices.Clear();
@@ -40,6 +45,7 @@ namespace Common
             }
             InitializeVAO_VBO_EBO(vertices.ToSingleArray(), indices.ToArray());
         }
+
         public override void Draw(ref mat4 view, ref mat4 projection)
         {
             if (vao == null)

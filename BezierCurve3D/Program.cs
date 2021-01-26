@@ -1,6 +1,4 @@
-﻿using Common;
-using GlmNet;
-using OpenTK.Mathematics;
+﻿using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
 
 namespace BezierCurve

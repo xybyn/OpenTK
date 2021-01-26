@@ -1,12 +1,7 @@
-﻿using GlmNet;
-using OpenTK.Graphics.OpenGL4;
-using OpenTKProject;
-using System.Collections.Generic;
-
-namespace Common
+﻿namespace Common.Drawers
 {
-    public class LineDrawer3D : SceneObject
+    /*public class LineDrawer3D : SceneObject
     {
-       // ..private 
-    }
+       // ..private
+    }*/
 }

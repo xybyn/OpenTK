@@ -9,6 +9,7 @@ namespace Common.Cameras
     {
         private mat4 projection;
         private vec3 targetPosition;
+
         public TargetCamera(vec3 targetPosition)
         {
             this.targetPosition = targetPosition;
@@ -16,7 +17,6 @@ namespace Common.Cameras
 
         public void OnUpdateFrame(FrameEventArgs e)
         {
-            
         }
     }
 }

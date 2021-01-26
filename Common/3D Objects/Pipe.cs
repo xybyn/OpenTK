@@ -1,39 +1,60 @@
 ﻿// unset
 
+using Common.Extensions;
+using Common.MathAbstractions;
 using GlmNet;
-using OpenTK.Graphics.OpenGL4;
-using OpenTKProject;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using static System.MathF;
 
-namespace Common
+namespace Common._3D_Objects
 {
-    public class Pipe : SceneObject
+    public class Pipe : SceneObject3D
     {
-        private float[] vertices;
-        private List<List<vec3>> contours = new();
-        private List<vec3> path = new();
+        private readonly List<vec3> _contour = new();
+        private readonly List<List<vec3>> _contours = new();
+
+        private readonly List<List<vec3>> _normals = new();
+        private readonly List<vec3> _path = new();
+        private float[] _vertices;
+
+        public Pipe(Func<List<vec3>> pathFunc, Func<List<vec3>> contourFunc = null)
+        {
+            _contour = contourFunc != null ? contourFunc() : GetCirclePoints(0.1f, 40);
+            _path = pathFunc();
+
+            CalculateVertexNormalsIndices();
+        }
+
+        public Pipe(IEnumerable<vec3> path, Func<List<vec3>> contourFunc = null)
+        {
+            _contour = contourFunc != null ? contourFunc() : GetCirclePoints(0.1f, 40);
+
+            foreach (vec3 p in path)
+            {
+                this._path.Add(p);
+            }
+            CalculateVertexNormalsIndices();
+        }
 
         private void CalculateVertexNormalsIndices()
         {
-            generatecont();
+            GenerateContour();
 
-            vertices = contours.ToSingleArray();
-            var no = normals.ToSingleArray();
-            var ind = new List<uint>();
-            for (int i = 0; i < contours.Count - 1; i++)
+            _vertices = _contours.ToSingleArray();
+            float[] no = _normals.ToSingleArray();
+            List<uint> ind = new();
+            for (int i = 0; i < _contours.Count - 1; i++)
             {
-                var currentCont = contours[(int)i];
-                var other = contours[(int)i + 1];
+                List<vec3> currentCont = _contours[i];
+                List<vec3> other = _contours[i + 1];
 
                 for (int j = 0; j < currentCont.Count - 1; j++)
                 {
-                    var curr = (uint)(i * currentCont.Count + j);
-                    var currR = (uint)(i * currentCont.Count + j + 1);
-                    var o = (uint)((i + 1) * currentCont.Count + j);
-                    var or = (uint)((i + 1) * currentCont.Count + j + 1);
+                    uint curr = (uint)((i * currentCont.Count) + j);
+                    uint currR = (uint)((i * currentCont.Count) + j + 1);
+                    uint o = (uint)(((i + 1) * currentCont.Count) + j);
+                    uint or = (uint)(((i + 1) * currentCont.Count) + j + 1);
 
                     ind.Add(curr);
                     ind.Add(currR);
@@ -44,42 +65,18 @@ namespace Common
                     ind.Add(or);
                 }
             }
-            InitializeVAO_VBO_EBO(vertices, no, ind.ToArray());
+            InitializeVAO_VBO_EBO(_vertices, no, ind.ToArray());
         }
 
-        public Pipe(Func<List<vec3>> pathFunc, Func<List<vec3>> contourFunc = null)
+        private List<vec3> GetCirclePoints(float radius, int steps)
         {
-            if (contourFunc != null)
-                contour = contourFunc();
-            else
-                contour = circle(0.1f, 40);
-            path = pathFunc();
-
-            CalculateVertexNormalsIndices();
-        }
-
-        public Pipe(IEnumerable<vec3> path, Func<List<vec3>> contourFunc = null)
-        {
-            if (contourFunc != null)
-                contour = contourFunc();
-            else
-                contour = circle(0.1f, 40);
-
-            foreach (var p in path)
+            List<vec3> points = new();
+            if (steps < 2)
             {
-                this.path.Add(p);
+                return points;
             }
-            CalculateVertexNormalsIndices();
-        }
 
-        private uint[] indices;
-
-        private List<vec3> circle(float radius, int steps)
-        {
-            List<vec3> points = new List<vec3>();
-            if (steps < 2) return points;
-
-            const float PI2 = 2 * MathF.PI;
+            const float PI2 = 2 * PI;
             float x, y, a;
             for (int i = 0; i <= steps; ++i)
             {
@@ -91,63 +88,66 @@ namespace Common
             return points;
         }
 
-        private List<vec3> proj(int fromIndex, int toIndex)
+        private List<vec3> ContourProjectionOnPlane(int fromIndex, int toIndex)
         {
             vec3 v1, v2, normal, point;
 
-            Line line = new Line();
+            Line line = new();
 
             // find direction vectors; v1 and v2
-            v1 = path[toIndex] - path[fromIndex];
-            if (toIndex == (int)path.Count - 1)
+            v1 = _path[toIndex] - _path[fromIndex];
+            if (toIndex == _path.Count - 1)
+            {
                 v2 = v1;
+            }
             else
-                v2 = path[toIndex + 1] - path[toIndex];
+            {
+                v2 = _path[toIndex + 1] - _path[toIndex];
+            }
 
             // normal vector of plane at toIndex
             normal = v1 + v2;
 
             // define plane equation at toIndex with normal and point
-            Plane plane = new Plane()
+            Plane plane = new()
             {
-                Normal = normal,
-                D = path[toIndex]
+                Normal = normal, D = _path[toIndex]
             };
 
             // project each vertex of contour to the plane
-            List<vec3> fromContour = contours[fromIndex];
-            List<vec3> toContour = new List<vec3>();
-            int count = (int)fromContour.Count;
+            List<vec3> fromContour = _contours[fromIndex];
+            List<vec3> toContour = new();
+            int count = fromContour.Count;
             for (int i = 0; i < count; ++i)
             {
                 line.Direction = v1;
-                line.Point = fromContour[i];// define line with direction and point
-                point = plane.Intersect(line);  // find the intersection point
+                line.Point = fromContour[i]; // define line with direction and point
+                point = plane.Intersect(line); // find the intersection point
                 toContour.Add(point);
             }
             return toContour;
         }
 
-        private void transformFirstContour()
+        private void TransformFirstContour()
         {
-            int pathCount = (int)path.Count;
-            int vertexCount = (int)contour.Count;
+            int pathCount = _path.Count;
+            int vertexCount = _contour.Count;
             mat4 matrix;
 
             if (pathCount > 0)
             {
                 // transform matrix
                 if (pathCount > 1)
-                /*matrix = glm.lookAt(new vec3(0, 0, 0), path[1]-path[0], new vec3(0, 1, 0));*/
+                    /*matrix = glm.lookAt(new vec3(0, 0, 0), path[1]-path[0], new vec3(0, 1, 0));*/
                 {
-                    var normal = new vec3(0, 1, 0);
-                    var target = path[1] - path[0];
-                    var gamma = MathF.Acos(glm.dot(target, normal) / (Sqrt(glm.dot(normal, normal)) * Sqrt(glm.dot(target, target))));
-                    var right = glm.cross(normal, target);
+                    vec3 normal = new(0, 1, 0);
+                    vec3 target = _path[1] - _path[0];
+                    float gamma = Acos(glm.dot(target, normal) / (Sqrt(glm.dot(normal, normal)) * Sqrt(glm.dot(target, target))));
+                    vec3 right = glm.cross(normal, target);
                     matrix = glm.rotate(gamma, right);
                 }
 
-                var model = glm.translate(mat4.identity(), path[0]);
+                mat4 model = glm.translate(mat4.identity(), _path[0]);
                 /*var model = mat4.identity();*/
 
                 // multiply matrix to the contour
@@ -155,46 +155,45 @@ namespace Common
                 //       MUST resubmit contour data if the path is resset to 0
                 for (int i = 0; i < vertexCount; ++i)
                 {
-                    contour[i] = new vec3(model * matrix * new vec4(contour[i], 1));
+                    _contour[i] = new vec3(model * matrix * new vec4(_contour[i], 1));
                 }
             }
         }
 
-        private List<vec3> contour = new List<vec3>();
-        private List<List<vec3>> normals = new();
-
-        private void generatecont()
+        private void GenerateContour()
         {
-            contours.Clear();
-            normals.Clear();
+            _contours.Clear();
+            _normals.Clear();
 
             // path must have at least a point
-            if (path.Count < 1)
+            if (_path.Count < 1)
+            {
                 return;
+            }
 
             // rotate and translate the contour to the first path point
-            transformFirstContour();
-            contours.Add(contour);
-            normals.Add(computeContourNormal(0));
+            TransformFirstContour();
+            _contours.Add(_contour);
+            _normals.Add(ComputeContourNormal(0));
 
             // project contour to the plane at the next path point
-            int count = (int)path.Count;
+            int count = _path.Count;
             for (int i = 1; i < count; ++i)
             {
-                contours.Add(proj(i - 1, i));
-                normals.Add(computeContourNormal(i));
+                _contours.Add(ContourProjectionOnPlane(i - 1, i));
+                _normals.Add(ComputeContourNormal(i));
             }
         }
 
-        private List<vec3> computeContourNormal(int pathIndex)
+        private List<vec3> ComputeContourNormal(int pathIndex)
         {
             // get current contour and center point
-            var contour = contours[pathIndex];
-            vec3 center = path[pathIndex];
+            List<vec3> contour = _contours[pathIndex];
+            vec3 center = _path[pathIndex];
 
-            List<vec3> contourNormal = new List<vec3>();
+            List<vec3> contourNormal = new();
             vec3 normal;
-            for (int i = 0; i < (int)contour.Count; ++i)
+            for (int i = 0; i < contour.Count; ++i)
             {
                 normal = glm.normalize(contour[i] - center);
                 contourNormal.Add(normal);

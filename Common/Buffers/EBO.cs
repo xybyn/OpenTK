@@ -1,27 +1,28 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using Common.Interfaces;
+using OpenTK.Graphics.OpenGL4;
 
-namespace Common
+namespace Common.Buffers
 {
     public class EBO : IOpenGLUnit
     {
-        public int ProgramID => _program;
-        private readonly int _program;
+        public int ProgramID { get; }
+
         private readonly uint[] _indices;
 
         public EBO(uint[] indices)
         {
-            _program = GL.GenBuffer();
+            ProgramID = GL.GenBuffer();
             _indices = indices;
         }
 
         public void Free()
         {
-            GL.DeleteBuffer(_program);
+            GL.DeleteBuffer(ProgramID);
         }
 
         public void Bind()
         {
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, _program);
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, ProgramID);
             GL.BufferData(BufferTarget.ElementArrayBuffer, _indices.Length * sizeof(uint), _indices,
                 BufferUsageHint.StaticDraw);
         }

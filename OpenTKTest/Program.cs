@@ -1,26 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using Common;
+﻿using Common;
+using Common.Windows;
 using GlmNet;
-using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
-using OpenTK.Windowing.GraphicsLibraryFramework;
-using static System.MathF;
-using static Utils.AppUtils;
 
 namespace OpenTKTest
 {
     internal class Program
     {
-        class TestWindow : Window3D
+        private class TestWindow : Window3D
         {
             public TestWindow(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
             {
+                var cube = new Cube();
+                cube.TranslateWorld(new vec3(0, 1, 0));
+                cube.Material.Color = new vec3(1, 0, 0);
+                toDraw.Add(cube);
             }
         }
+
         private static void Main(string[] args)
         {
             var settings = GameWindowSettings.Default;
