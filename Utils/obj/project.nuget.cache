@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "N5SKAv0TrZOieuPuX42ILjFFD+swnxiaaZA1I74jeuoNH7G3BFnlthiCRU8lgJ+bEuK5P6THUhGO72ubVBIF/g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Nikita\\source\\repos\\OpenTKTest\\Utils\\Utils.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Nikita\\.nuget\\packages\\glmnet\\0.7.0\\glmnet.0.7.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'GlmNet 0.7.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "libraryId": "GlmNet",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    }
+  ]
+}

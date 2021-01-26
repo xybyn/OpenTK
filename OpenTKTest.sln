@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenTKTest", "OpenTKTest\OpenTKTest.csproj", "{A315C4EA-EB7D-40CE-A7C9-157B9FE9D122}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{08412233-EF65-40E2-81B4-803D2FD4EFF6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils", "Utils\Utils.csproj", "{3AFD3739-FC6F-4344-9845-A8A0084698DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BezierCurve", "BezierCurve\BezierCurve.csproj", "{9F6E603E-6E81-4651-B9C7-26D92678E50A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BezierSurface", "BezierSurface\BezierSurface.csproj", "{A70CCE8F-05CA-47CA-83E3-0286961EA7A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A1148E0-560B-4788-9A23-0487F6859AA0}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTKProject", "OpenTKProject\OpenTKProject.csproj", "{548A5762-0454-43F5-B85B-E6963BE06F76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A315C4EA-EB7D-40CE-A7C9-157B9FE9D122}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A315C4EA-EB7D-40CE-A7C9-157B9FE9D122}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A315C4EA-EB7D-40CE-A7C9-157B9FE9D122}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A315C4EA-EB7D-40CE-A7C9-157B9FE9D122}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08412233-EF65-40E2-81B4-803D2FD4EFF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08412233-EF65-40E2-81B4-803D2FD4EFF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08412233-EF65-40E2-81B4-803D2FD4EFF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08412233-EF65-40E2-81B4-803D2FD4EFF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AFD3739-FC6F-4344-9845-A8A0084698DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AFD3739-FC6F-4344-9845-A8A0084698DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AFD3739-FC6F-4344-9845-A8A0084698DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AFD3739-FC6F-4344-9845-A8A0084698DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F6E603E-6E81-4651-B9C7-26D92678E50A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F6E603E-6E81-4651-B9C7-26D92678E50A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F6E603E-6E81-4651-B9C7-26D92678E50A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F6E603E-6E81-4651-B9C7-26D92678E50A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A70CCE8F-05CA-47CA-83E3-0286961EA7A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A70CCE8F-05CA-47CA-83E3-0286961EA7A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A70CCE8F-05CA-47CA-83E3-0286961EA7A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A70CCE8F-05CA-47CA-83E3-0286961EA7A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{548A5762-0454-43F5-B85B-E6963BE06F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{548A5762-0454-43F5-B85B-E6963BE06F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{548A5762-0454-43F5-B85B-E6963BE06F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{548A5762-0454-43F5-B85B-E6963BE06F76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4629453C-DB04-4EAB-8DA2-A320E0BB5DB2}
+	EndGlobalSection
+EndGlobal
