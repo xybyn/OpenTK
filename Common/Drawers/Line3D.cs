@@ -14,17 +14,17 @@ namespace Common
         {
             line = newLine;
             GL.BindBuffer(BufferTarget.ArrayBuffer, vbo.ProgramID);
-            float v = line.point.x;
+            float v = line.Point.x;
             GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, sizeof(float), ref v);
-            v = line.point.y;
+            v = line.Point.y;
             GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(1 * sizeof(float)), sizeof(float), ref v);
-            v = line.point.z;
+            v = line.Point.z;
             GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(2 * sizeof(float)), sizeof(float), ref v);
-            v = line.direction.x;
+            v = line.Direction.x;
             GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(3 * sizeof(float)), sizeof(float), ref v);
-            v = line.direction.y;
+            v = line.Direction.y;
             GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(4 * sizeof(float)), sizeof(float), ref v);
-            v = line.direction.z;
+            v = line.Direction.z;
             GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(5 * sizeof(float)), sizeof(float), ref v);
         }
 
@@ -52,12 +52,12 @@ namespace Common
         public Line3D(Line line)
         {
             shader = new Shader(@"Shaders\Point\point3D.vert", @"Shaders\Point\point3D.frag");
-            vertices[0] = line.point.x;
-            vertices[1] = line.point.y;
-            vertices[2] = line.point.z;
-            vertices[3] = line.direction.x;
-            vertices[4] = line.direction.y;
-            vertices[5] = line.direction.z;
+            vertices[0] = line.Point.x;
+            vertices[1] = line.Point.y;
+            vertices[2] = line.Point.z;
+            vertices[3] = line.Direction.x;
+            vertices[4] = line.Direction.y;
+            vertices[5] = line.Direction.z;
             vbo = new VBO(vertices, sizeof(float) * vertices.Length);
             vao = new VAO(vbo, new[]
             {

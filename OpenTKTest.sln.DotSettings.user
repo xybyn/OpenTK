@@ -1,3 +1,3 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=08412233_002DEF65_002D40E2_002D81B4_002D803D2FD4EFF6_002Fd_003AWindows_002Ff_003AWindow3D_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=548a5762_002D0454_002D43f5_002Db85b_002De6963be06f76_0023OpenTKProject/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+	</wpf:ResourceDictionary>

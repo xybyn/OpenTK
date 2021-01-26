@@ -9,16 +9,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils", "Utils\Utils.csproj", "{3AFD3739-FC6F-4344-9845-A8A0084698DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BezierCurve", "BezierCurve\BezierCurve.csproj", "{9F6E603E-6E81-4651-B9C7-26D92678E50A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BezierSurface", "BezierSurface\BezierSurface.csproj", "{A70CCE8F-05CA-47CA-83E3-0286961EA7A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BezierCurve3D", "BezierCurve3D\BezierCurve3D.csproj", "{9F6E603E-6E81-4651-B9C7-26D92678E50A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A1148E0-560B-4788-9A23-0487F6859AA0}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTKProject", "OpenTKProject\OpenTKProject.csproj", "{548A5762-0454-43F5-B85B-E6963BE06F76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParametricSpiral3D", "ParametricSpiral3D\ParametricSpiral3D.csproj", "{79C81DE0-0E45-4605-9011-3E73F9344F62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,14 +40,10 @@ Global
 		{9F6E603E-6E81-4651-B9C7-26D92678E50A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F6E603E-6E81-4651-B9C7-26D92678E50A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F6E603E-6E81-4651-B9C7-26D92678E50A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A70CCE8F-05CA-47CA-83E3-0286961EA7A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A70CCE8F-05CA-47CA-83E3-0286961EA7A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A70CCE8F-05CA-47CA-83E3-0286961EA7A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A70CCE8F-05CA-47CA-83E3-0286961EA7A1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{548A5762-0454-43F5-B85B-E6963BE06F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{548A5762-0454-43F5-B85B-E6963BE06F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{548A5762-0454-43F5-B85B-E6963BE06F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{548A5762-0454-43F5-B85B-E6963BE06F76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79C81DE0-0E45-4605-9011-3E73F9344F62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79C81DE0-0E45-4605-9011-3E73F9344F62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79C81DE0-0E45-4605-9011-3E73F9344F62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79C81DE0-0E45-4605-9011-3E73F9344F62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

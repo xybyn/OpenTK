@@ -15,6 +15,12 @@ namespace OpenTKTest
 {
     internal class Program
     {
+        class TestWindow : Window3D
+        {
+            public TestWindow(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
+            {
+            }
+        }
         private static void Main(string[] args)
         {
             var settings = GameWindowSettings.Default;
@@ -24,7 +30,7 @@ namespace OpenTKTest
                 Title = "Surface"
             };
 
-            using (var window = new Window3D(settings, nativeWindowSettings))
+            using (var window = new TestWindow(settings, nativeWindowSettings))
             {
                 window.Run();
             }

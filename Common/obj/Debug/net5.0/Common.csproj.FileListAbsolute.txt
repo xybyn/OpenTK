@@ -31,3 +31,5 @@ C:\Users\Nikita\source\repos\OpenTKTest\Common\bin\Debug\net5.0\Shaders\3D\defau
 C:\Users\Nikita\source\repos\OpenTKTest\Common\bin\Debug\net5.0\Shaders\3D\default.vert
 C:\Users\Nikita\source\repos\OpenTKTest\Common\bin\Debug\net5.0\Shaders\3D\collider.frag
 C:\Users\Nikita\source\repos\OpenTKTest\Common\bin\Debug\net5.0\Shaders\3D\collider.vert
+C:\Users\Nikita\source\repos\OpenTKTest\Common\bin\Debug\net5.0\Shaders\3D\parametricFunction.frag
+C:\Users\Nikita\source\repos\OpenTKTest\Common\bin\Debug\net5.0\Shaders\3D\parametricFunction.vert

@@ -10,7 +10,7 @@ namespace BezierSurface
     {
         private static void Main(string[] args)
         {
-            var settings = GameWindowSettings.Default;
+            /*var settings = GameWindowSettings.Default;
             var nativeWindowSettings = new NativeWindowSettings
             {
                 Size = new Vector2i(800, 600),
@@ -18,7 +18,7 @@ namespace BezierSurface
             };
             using (var window = new Window3D(settings, nativeWindowSettings))
             {
-                var points = new PointDrawer3D(null);
+                /*var points = new PointDrawer3D(null);
                 points.AddPoint(new vec3(-9, 0, -9));
                 points.AddPoint(new vec3(-3, 0, -9));
                 points.AddPoint(new vec3(3, 0, -9));
@@ -62,9 +62,9 @@ namespace BezierSurface
                     }
 
                     s += step;
-                }
+                }#1#
                 window.Run();
-            }
+            }*/
         }
     }
 }
