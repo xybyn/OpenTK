@@ -82,14 +82,14 @@ namespace Common.Colliders
         {
             var v = rayDirection;
             var p = rayOrigin;
-            var domin = glm.dot(Plane.Normal, v);
-            if (domin == 0)
+            var dominator = glm.dot(Plane.Normal, v);
+            if (dominator == 0)
             {
                 result = 0;
                 return false;
             }
 
-            var t = (-1 * glm.dot(Plane.Normal, p) + glm.dot(Plane.Normal, Plane.D)) / domin;
+            var t = (-1 * glm.dot(Plane.Normal, p) + glm.dot(Plane.Normal, Plane.D)) / dominator;
             var intersectionPoint = rayOrigin + t * rayDirection;
             intersectionPoint = new vec3(glm.inverse(Model) * new vec4(intersectionPoint, 1));
             if (intersectionPoint.x > LocalScaling.x / 2f || intersectionPoint.x < -LocalScaling.x / 2f

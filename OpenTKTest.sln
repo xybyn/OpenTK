@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RayCastDemo3D", "RayCastDem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurfaceDemo3D", "SurfaceDemo3D\SurfaceDemo3D.csproj", "{E6F062A4-42CD-4AAE-8FBB-6822A7A4BEE4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{5F4C63F8-8F29-4C7F-B92D-187189A756A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,5 +64,11 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4629453C-DB04-4EAB-8DA2-A320E0BB5DB2}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9F6E603E-6E81-4651-B9C7-26D92678E50A} = {5F4C63F8-8F29-4C7F-B92D-187189A756A9}
+		{79C81DE0-0E45-4605-9011-3E73F9344F62} = {5F4C63F8-8F29-4C7F-B92D-187189A756A9}
+		{EBC52573-65C0-4884-ACCE-6F7C96BF192F} = {5F4C63F8-8F29-4C7F-B92D-187189A756A9}
+		{E6F062A4-42CD-4AAE-8FBB-6822A7A4BEE4} = {5F4C63F8-8F29-4C7F-B92D-187189A756A9}
 	EndGlobalSection
 EndGlobal

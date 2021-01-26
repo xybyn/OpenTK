@@ -11,20 +11,35 @@ namespace Common._3D_Objects
 {
     public class Pipe : SceneObject3D
     {
-        private readonly List<vec3> _contour = new();
+        private List<vec3> _contour = new();
         private readonly List<List<vec3>> _contours = new();
 
         private readonly List<List<vec3>> _normals = new();
-        private readonly List<vec3> _path = new();
+        private List<vec3> _path = new();
         private float[] _vertices;
+        
+        public Pipe(){}
 
         public Pipe(Func<List<vec3>> pathFunc, Func<List<vec3>> contourFunc = null)
         {
+            SetNewFunctions(pathFunc, contourFunc);
+        }
+
+        public void SetNewFunctions(Func<List<vec3>> pathFunc, Func<List<vec3>> contourFunc=null)
+        {
+            ClearBuffers();
+            _contour.Clear();
+            _contours.Clear();
+            _normals.Clear();
+            _path.Clear();
+            
             _contour = contourFunc != null ? contourFunc() : GetCirclePoints(0.1f, 40);
             _path = pathFunc();
 
             CalculateVertexNormalsIndices();
         }
+        
+        
 
         public Pipe(IEnumerable<vec3> path, Func<List<vec3>> contourFunc = null)
         {

@@ -20,7 +20,18 @@ namespace Common._3D_Objects
         public Surface(Func<float, float, vec3> f, SurfaceDrawer3DSettings settings, bool invertNormals = false)
         {
             _settings = settings;
-            int steps = settings.NumberOfPartitions;
+            SetNewFunction(f, invertNormals);
+        }
+        public void SetNewFunction(Func<float, float, float> f, bool invertNormals)
+        {
+            SetNewFunction((x, z) => new vec3(x, f(x, z), z), invertNormals);
+        }
+
+        public void SetNewFunction(Func<float, float, vec3> f, bool invertNormals)
+        {
+            ClearBuffers();
+            
+            int steps = _settings.NumberOfPartitions;
 
             List<vec3> vertices = InitializeVertices(f);
             List<uint> indices = AppUtils.GetIndices(steps, steps);
