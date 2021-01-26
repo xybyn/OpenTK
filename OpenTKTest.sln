@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParametricSpiral3D", "Param
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RayCastDemo3D", "RayCastDemo3D\RayCastDemo3D.csproj", "{EBC52573-65C0-4884-ACCE-6F7C96BF192F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurfaceDemo3D", "SurfaceDemo3D\SurfaceDemo3D.csproj", "{E6F062A4-42CD-4AAE-8FBB-6822A7A4BEE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{EBC52573-65C0-4884-ACCE-6F7C96BF192F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBC52573-65C0-4884-ACCE-6F7C96BF192F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBC52573-65C0-4884-ACCE-6F7C96BF192F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6F062A4-42CD-4AAE-8FBB-6822A7A4BEE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6F062A4-42CD-4AAE-8FBB-6822A7A4BEE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6F062A4-42CD-4AAE-8FBB-6822A7A4BEE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6F062A4-42CD-4AAE-8FBB-6822A7A4BEE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
