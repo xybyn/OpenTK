@@ -67,7 +67,7 @@ namespace Common._3D_Objects
         {
             foreach (Collider collider in _colliders)
             {
-                if (collider.IntersectsRay(ray, cameraPosition, out var result))
+                if (collider.IsIntersectsRay(ray, cameraPosition, out var result))
                 {
                     string axisname = ((Vector3D)collider.Parent).AxisName;
                     _axis = axisname;

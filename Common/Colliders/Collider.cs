@@ -11,9 +11,11 @@ namespace Common.Colliders
     public abstract class Collider : SceneObject3D
     {
         public bool ShowColliders { get; set; } = true;
+        private const string DEFAULT_COLLIDER_VERT_SHADER = @"Shaders\3D\collider.vert";
+        private const string DEFAULT_COLLIDER_FRAG_SHADER = @"Shaders\3D\collider.frag";
         protected Collider()
         {
-            shader = new Shader(@"Shaders\3D\collider.vert", @"Shaders\3D\collider.frag");
+            shader = new Shader(DEFAULT_COLLIDER_VERT_SHADER, DEFAULT_COLLIDER_FRAG_SHADER);
         }
 
         public override void Draw(ref mat4 view, ref mat4 projection)
@@ -25,6 +27,6 @@ namespace Common.Colliders
             GL.DrawElements(PrimitiveType.Lines, indicesCount, DrawElementsType.UnsignedInt, 0);
         }
 
-        public abstract bool IntersectsRay(vec3 rayDirection, vec3 rayOrigin, out RaycastHit result);
+        public abstract bool IsIntersectsRay(vec3 rayDirection, vec3 rayOrigin, out RaycastHit result);
     }
 }

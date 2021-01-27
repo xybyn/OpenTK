@@ -3,16 +3,12 @@ using Common.Colliders;
 using Common.Physics3D;
 using Common.Windows;
 using GlmNet;
-using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
-using System.Drawing;
-using static System.MathF;
-using System.Drawing;
-using System.IO;
+
 namespace OpenTKTest
 {
 
@@ -46,6 +42,12 @@ namespace OpenTKTest
                 AddGrid();
                 AddMainCoordinatesAxis();
 
+            }
+
+            protected override void OnLoad()
+            {
+                base.OnLoad();
+                
             }
 
             protected override void OnUpdateFrame(FrameEventArgs args)
@@ -102,7 +104,7 @@ namespace OpenTKTest
 
                 var ray = Physics3D.ScreenPointToWorldRay(new vec2(MousePosition.X, MousePosition.Y),
                     new vec2(Size.X, Size.Y), projection, view);
-                if (collider.IntersectsRay(ray, position, out var result))
+                if (collider.IsIntersectsRay(ray, position, out var result))
                 {
                     cube.Material.Color = new vec3(0, 1, 0);
                 }

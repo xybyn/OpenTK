@@ -6,7 +6,6 @@
 
     <ItemGroup>
       <PackageReference Include="GlmNet" Version="0.7.0" />
-      <PackageReference Include="GlmSharp" Version="0.9.8" />
       <PackageReference Include="OpenTK" Version="4.4.0" />
     </ItemGroup>
 

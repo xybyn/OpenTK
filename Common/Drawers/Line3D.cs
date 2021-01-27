@@ -29,7 +29,7 @@ namespace Common.Drawers
             InitializeVAO_VBO_EBO(vertices.ToSingleArray(), indices);
         }
 
-        public override bool IntersectsRay(vec3 rayDirection, vec3 rayOrigin, out RaycastHit result)
+        public override bool IsIntersectsRay(vec3 rayDirection, vec3 rayOrigin, out RaycastHit result)
         {
             throw new NotImplementedException();
         }

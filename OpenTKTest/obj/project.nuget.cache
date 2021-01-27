@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "BKoe6JOThLtQ+PYBidus06JwFtoFy8Ne2UH8aEzOKPFSNDQ4LwDez1Be08XP6GMXVC/bKUjod1AJg38sfjIzfQ==",
+  "dgSpecHash": "JP1IPAYx4RIccmj+MTzrDWFR760pzS0B+yvJwUzBwR8hrW1kRNwPRvWOwRZzbP9GcwQqcRjx913WWNx7ZYzgKQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Nikita\\source\\repos\\OpenTKTest\\OpenTKTest\\OpenTKTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nikita\\.nuget\\packages\\glmnet\\0.7.0\\glmnet.0.7.0.nupkg.sha512",
-    "C:\\Users\\Nikita\\.nuget\\packages\\glmsharp\\0.9.8\\glmsharp.0.9.8.nupkg.sha512",
     "C:\\Users\\Nikita\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\Nikita\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\Nikita\\.nuget\\packages\\opentk\\4.4.0\\opentk.4.4.0.nupkg.sha512",
@@ -28,16 +27,6 @@
       "warningLevel": 1,
       "message": "Package 'GlmNet 0.7.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
       "libraryId": "GlmNet",
-      "targetGraphs": [
-        "net5.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'GlmSharp 0.9.8' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
-      "libraryId": "GlmSharp",
       "targetGraphs": [
         "net5.0"
       ]

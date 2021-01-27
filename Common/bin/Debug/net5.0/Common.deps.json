@@ -9,7 +9,6 @@
       "Common/1.0.0": {
         "dependencies": {
           "GlmNet": "0.7.0",
-          "GlmSharp": "0.9.8",
           "OpenTK": "4.4.0",
           "Utils": "1.0.0"
         },
@@ -22,14 +21,6 @@
           "lib/net40/GlmNet.dll": {
             "assemblyVersion": "0.7.0.0",
             "fileVersion": "0.7.0.0"
-          }
-        }
-      },
-      "GlmSharp/0.9.8": {
-        "runtime": {
-          "lib/Net45/GlmSharp.dll": {
-            "assemblyVersion": "0.9.8.0",
-            "fileVersion": "0.9.8.0"
           }
         }
       },
@@ -186,13 +177,6 @@
       "sha512": "sha512-g3EFJOV89dWppRVT5PJ8nVYWSEIoB4yqqEZy71ryb3mfxSGrvwqxsF+XbK+J0jUgSwRIYEWHqodvtd3LchlE+w==",
       "path": "glmnet/0.7.0",
       "hashPath": "glmnet.0.7.0.nupkg.sha512"
-    },
-    "GlmSharp/0.9.8": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-09/3MF8WhtFwfrE7bHwzhDhVTAQB2OvbzNVHLT8NFwNIdnGrud6PcyplHBxOaw2MMsgfm2cYsgwkj1YGttupwg==",
-      "path": "glmsharp/0.9.8",
-      "hashPath": "glmsharp.0.9.8.nupkg.sha512"
     },
     "OpenTK/4.4.0": {
       "type": "package",

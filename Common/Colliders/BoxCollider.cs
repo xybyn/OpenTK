@@ -34,12 +34,12 @@ namespace Common.Colliders
             }
         }
 
-        public override bool IntersectsRay(vec3 rayDirection, vec3 rayOrigin, out RaycastHit result)
+        public override bool IsIntersectsRay(vec3 rayDirection, vec3 rayOrigin, out RaycastHit result)
         {
             var results = new List<RaycastHit>();
             foreach (var planeCollider in _planeColliders)
             {
-                if (planeCollider.IntersectsRay(rayDirection, rayOrigin, out var res))
+                if (planeCollider.IsIntersectsRay(rayDirection, rayOrigin, out var res))
                 {
                     results.Add(res);
                 }

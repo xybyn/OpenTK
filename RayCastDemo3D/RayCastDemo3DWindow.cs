@@ -99,7 +99,7 @@ namespace RayCastDemo
 
             foreach (var collider in colliders)
             {
-                if (collider.IntersectsRay(ray, position, out var result))
+                if (collider.IsIntersectsRay(ray, position, out var result))
                 {
                     collider.Parent.Material.Color = new vec3(0, 0.5f, 0);
 

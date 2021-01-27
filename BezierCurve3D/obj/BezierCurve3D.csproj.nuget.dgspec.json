@@ -122,10 +122,6 @@
               "target": "Package",
               "version": "[0.7.0, )"
             },
-            "GlmSharp": {
-              "target": "Package",
-              "version": "[0.9.8, )"
-            },
             "OpenTK": {
               "target": "Package",
               "version": "[4.4.0, )"

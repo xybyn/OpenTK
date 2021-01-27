@@ -55,7 +55,7 @@ namespace Common.Colliders
             Material.Color = new vec3(0, 1, 0);
         }
 
-        public override bool IntersectsRay(vec3 rayDirection, vec3 rayOrigin, out RaycastHit result)
+        public override bool IsIntersectsRay(vec3 rayDirection, vec3 rayOrigin, out RaycastHit result)
         {
             vec3 k = rayOrigin - WorldPosition;
             var b = glm.dot(k, rayDirection);
@@ -76,6 +76,47 @@ namespace Common.Colliders
                 {
                     Point =intersectedPoint,
                     Normal = glm.normalize(intersectedPoint-WorldPosition)
+                };
+                return true;
+            }
+            result = null;
+            return false;
+        }
+
+        public bool IsIntersectsPlane(PlaneCollider planeCollider, vec3 movingDirection, out object o)
+        {
+            var P1 = WorldPosition;
+            var V = glm.normalize(movingDirection);
+
+            var D = -glm.dot(planeCollider.Plane.Normal, planeCollider.Plane.D);
+            var L = planeCollider.Plane.Normal;
+
+            var upper = -(glm.dot(L, P1) + D);
+            var lower =  (glm.dot(L, V) + D);
+            var t = upper / lower;
+            if(!float.IsNaN(t))
+            {
+                var r = glm.dot(planeCollider.Plane.Normal, P1) + D;
+                var C = P1 + t * V - r * planeCollider.Plane.Normal;
+                Console.WriteLine(C);
+            }
+            o = null;
+            return false;
+        }
+        
+        public bool IsIntersectsSphere(SphereCollider planeCollider, out RaycastHit result)
+        {
+            var p = WorldPosition - planeCollider.WorldPosition;
+            var dist = Sqrt(glm.dot(p, p));
+
+            if (dist <= _radius + planeCollider._radius)
+            {
+                p = glm.normalize(p);
+                var point = planeCollider.WorldPosition + planeCollider._radius * p;
+                var normal = glm.normalize(point-planeCollider.WorldPosition);
+                result = new RaycastHit()
+                {
+                    Point = point, Normal = normal
                 };
                 return true;
             }

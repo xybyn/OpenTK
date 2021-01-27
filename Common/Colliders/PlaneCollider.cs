@@ -14,7 +14,7 @@ namespace Common.Colliders
     {
         private readonly Plane _plane;
 
-        private Plane Plane
+        public Plane Plane
         {
             get
             {
@@ -79,7 +79,7 @@ namespace Common.Colliders
             TranslateWorld(pos);
         }
 
-        public override bool IntersectsRay(vec3 rayDirection, vec3 rayOrigin, out RaycastHit result)
+        public override bool IsIntersectsRay(vec3 rayDirection, vec3 rayOrigin, out RaycastHit result)
         {
             var v = rayDirection;
             var p = rayOrigin;

@@ -11,15 +11,6 @@
           "lib/net40/GlmNet.dll": {}
         }
       },
-      "GlmSharp/0.9.8": {
-        "type": "package",
-        "compile": {
-          "lib/Net45/GlmSharp.dll": {}
-        },
-        "runtime": {
-          "lib/Net45/GlmSharp.dll": {}
-        }
-      },
       "OpenTK/4.4.0": {
         "type": "package",
         "dependencies": {
@@ -187,21 +178,6 @@
         "lib/net40/GlmNet.dll"
       ]
     },
-    "GlmSharp/0.9.8": {
-      "sha512": "09/3MF8WhtFwfrE7bHwzhDhVTAQB2OvbzNVHLT8NFwNIdnGrud6PcyplHBxOaw2MMsgfm2cYsgwkj1YGttupwg==",
-      "type": "package",
-      "path": "glmsharp/0.9.8",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "glmsharp.0.9.8.nupkg.sha512",
-        "glmsharp.nuspec",
-        "lib/Net20/GlmSharp.XML",
-        "lib/Net20/GlmSharp.dll",
-        "lib/Net45/GlmSharp.XML",
-        "lib/Net45/GlmSharp.dll"
-      ]
-    },
     "OpenTK/4.4.0": {
       "sha512": "Aryw2QNeApYtbv9fGc1QbPjNvVrkyUsMHNjnQzW3MSUPudttpOLNVgRiF414IlmgvmMOAv4qPLCZfBD/+dGp+w==",
       "type": "package",
@@ -365,7 +341,6 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "GlmNet >= 0.7.0",
-      "GlmSharp >= 0.9.8",
       "OpenTK >= 4.4.0",
       "Utils >= 1.0.0"
     ]
@@ -421,10 +396,6 @@
             "target": "Package",
             "version": "[0.7.0, )"
           },
-          "GlmSharp": {
-            "target": "Package",
-            "version": "[0.9.8, )"
-          },
           "OpenTK": {
             "target": "Package",
             "version": "[4.4.0, )"
@@ -456,16 +427,6 @@
       "warningLevel": 1,
       "message": "Package 'GlmNet 0.7.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
       "libraryId": "GlmNet",
-      "targetGraphs": [
-        "net5.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'GlmSharp 0.9.8' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
-      "libraryId": "GlmSharp",
       "targetGraphs": [
         "net5.0"
       ]
