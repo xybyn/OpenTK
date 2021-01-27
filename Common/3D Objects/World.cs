@@ -8,6 +8,8 @@ namespace Common
     public class World : SceneObject3D
     {
         public override mat4 Model => mat4.identity();
+        public override mat4 ParentModel => mat4.identity();
+        public override mat4 ParentModelWithoutRotation => mat4.identity();
 
         public override void Draw(ref mat4 view, ref mat4 projection)
         {

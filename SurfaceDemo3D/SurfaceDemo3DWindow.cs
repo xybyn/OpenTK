@@ -30,7 +30,7 @@ namespace SurfaceDemo
             _dynamicSurface.Material.Color = new vec3(0.6f, 0.6f, 0);
             toDraw.Add(_dynamicSurface);
             //_dynamicSurface.ShowNormals = true;
-            _dynamicSurface.ScaleWorld(new vec3(1, 0.5f, 1));
+            _dynamicSurface.ScaleLocal(new vec3(1, 0.5f, 1));
             var surface2 = new Surface((u, v) =>
                 new vec3(
                     1 * Cos(u) * Cos(v),

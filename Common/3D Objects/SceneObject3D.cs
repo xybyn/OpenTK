@@ -28,7 +28,11 @@ namespace Common._3D_Objects
         private mat4 _scaling = mat4.identity();
         protected Shader shader;
 
-        public mat4 translation = mat4.identity();
+        private mat4 _translationMatrix = mat4.identity();
+
+        public mat4 TranslationMatrix => _translationMatrix;
+        public mat4 RotationMatrix => _rotationMatrix;
+        public mat4 ScalingMatrix => _scaling;
         protected VAO vao;
 
         protected VBO vbo;
@@ -54,8 +58,11 @@ namespace Common._3D_Objects
                 DEFAULT_NORMALS_SHADER_GEOM_PATH);
         }
 
-        public virtual mat4 Model => Parent.Model * translation * _rotationMatrix * _scaling;
+        public virtual mat4 Model => ParentModel * _translationMatrix * _rotationMatrix * _scaling;
+        public mat4 LocalModel => _translationMatrix * _rotationMatrix * _scaling;
 
+        public virtual mat4 ParentModel => Parent.Model;
+        public virtual mat4 ParentModelWithoutRotation => Parent.ParentModelWithoutRotation*TranslationMatrix*ScalingMatrix;
         public Material Material { get; set; }
 
         public bool ShowNormals { get; set; }
@@ -64,7 +71,7 @@ namespace Common._3D_Objects
 
         public SceneObject3D Parent { get; protected set; }
 
-        public vec3 WorldPosition => new(Parent.Model * new vec4(LocalPosition, 1));
+        public vec3 WorldPosition => new(ParentModel * new vec4(LocalPosition, 1));
 
         public vec3 LocalPosition { get; private set; }
 
@@ -78,20 +85,14 @@ namespace Common._3D_Objects
 
         public void TranslateWorld(vec3 newPosition)
         {
-            LocalPosition = new vec3(glm.inverse(Parent.Model) * new vec4(newPosition, 1));
-            translation = glm.translate(mat4.identity(), LocalPosition);
+            LocalPosition = new vec3(glm.inverse(ParentModel) * new vec4(newPosition, 1));
+            _translationMatrix = glm.translate(mat4.identity(), LocalPosition);
         }
 
         public void TranslateLocal(vec3 newPosition)
         {
             LocalPosition = newPosition;
-            translation = glm.translate(mat4.identity(), newPosition);
-        }
-
-        public void ScaleWorld(vec3 newScale)
-        {
-            LocalScaling = new vec3(glm.inverse(Parent.Model) * new vec4(newScale, 1));
-            translation = glm.translate(mat4.identity(), LocalScaling);
+            _translationMatrix = glm.translate(mat4.identity(), newPosition);
         }
 
         public void ScaleLocal(vec3 newScale)
@@ -200,7 +201,7 @@ namespace Common._3D_Objects
                     }
                 });
         }
-
+        
         protected void InitializeVAO_VBO_EBO(List<vec3> vertices, List<uint> indices)
         {
             InitializeVAO_VBO_EBO(vertices.ToSingleArray(), indices.ToArray());
@@ -208,13 +209,13 @@ namespace Common._3D_Objects
 
         protected virtual void UpdateDefaultShader(ref mat4 view, ref mat4 projection)
         {
-            var parentModel = Parent.Model;
+            var parentModel = ParentModel;
             var color = Material.Color;
 
             shader.SetMat4("parentModel", ref parentModel);
             shader.SetVec3("color", ref color);
             shader.SetMat4("view", ref view);
-            shader.SetMat4("translation", ref translation);
+            shader.SetMat4("translation", ref _translationMatrix);
             shader.SetMat4("scaling", ref _scaling);
             shader.SetMat4("rotation", ref _rotationMatrix);
             shader.SetMat4("projection", ref projection);

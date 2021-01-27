@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SphereToSphereCollisionDete
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SphereToInfinitePlaneCollisionDetection", "SphereToInfinitePlaneCollisionDetection\SphereToInfinitePlaneCollisionDetection.csproj", "{78155545-2AC4-4F22-94A7-58945C14546C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxisAlignedBoxToAxisAlignedBoxCollisionDetection", "AxisAlignedBoxToAxisAlignedBoxCollisionDetection\AxisAlignedBoxToAxisAlignedBoxCollisionDetection.csproj", "{F8385270-D994-40C7-99C7-34B3E6D6297B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +86,10 @@ Global
 		{78155545-2AC4-4F22-94A7-58945C14546C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78155545-2AC4-4F22-94A7-58945C14546C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78155545-2AC4-4F22-94A7-58945C14546C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8385270-D994-40C7-99C7-34B3E6D6297B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8385270-D994-40C7-99C7-34B3E6D6297B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8385270-D994-40C7-99C7-34B3E6D6297B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8385270-D994-40C7-99C7-34B3E6D6297B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,5 +107,6 @@ Global
 		{7CF6B4FA-403D-4C0F-96E1-3D088228D95C} = {E646D6F2-A5FE-4769-8DF4-B8273439A2B1}
 		{70F395E0-51AA-4D34-94D7-BB564CC9CE8D} = {E646D6F2-A5FE-4769-8DF4-B8273439A2B1}
 		{78155545-2AC4-4F22-94A7-58945C14546C} = {E646D6F2-A5FE-4769-8DF4-B8273439A2B1}
+		{F8385270-D994-40C7-99C7-34B3E6D6297B} = {E646D6F2-A5FE-4769-8DF4-B8273439A2B1}
 	EndGlobalSection
 EndGlobal

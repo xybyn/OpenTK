@@ -33,7 +33,7 @@ namespace Common._3D_Objects
             x.Material.Color = new vec3(0.5f, 0, 0);
             x.TranslateWorld(new vec3(offset, 0, 0));
             Collider xCollider = new BoxCollider();
-            xCollider.ScaleWorld(new vec3(0.1f, 1, 0.1f));
+            xCollider.ScaleLocal(new vec3(0.1f, 1, 0.1f));
             xCollider.AttachTo(x);
 
             SceneObject3D y = new Vector3D("y");
@@ -41,7 +41,7 @@ namespace Common._3D_Objects
             y.Material.Color = new vec3(0, 0.5f, 0);
             y.AttachTo(this);
             Collider yCollider = new BoxCollider();
-            yCollider.ScaleWorld(new vec3(0.1f, 1, 0.1f));
+            yCollider.ScaleLocal(new vec3(0.1f, 1, 0.1f));
             yCollider.AttachTo(y);
 
             SceneObject3D z = new Vector3D("z");
@@ -50,7 +50,7 @@ namespace Common._3D_Objects
             z.Material.Color = new vec3(0, 0, 0.5f);
             z.AttachTo(this);
             Collider zCollider = new BoxCollider();
-            zCollider.ScaleWorld(new vec3(0.1f, 1, 0.1f));
+            zCollider.ScaleLocal(new vec3(0.1f, 1, 0.1f));
             zCollider.AttachTo(z);
 
             _colliders.Add(xCollider);
