@@ -26,7 +26,6 @@ C:\Users\Nikita\source\repos\OpenTKTest\BezierSurface\bin\Debug\net5.0\BezierSur
 C:\Users\Nikita\source\repos\OpenTKTest\BezierSurface\bin\Debug\net5.0\ref\BezierSurface.dll
 C:\Users\Nikita\source\repos\OpenTKTest\BezierSurface\bin\Debug\net5.0\BezierSurface.pdb
 C:\Users\Nikita\source\repos\OpenTKTest\BezierSurface\bin\Debug\net5.0\GlmNet.dll
-C:\Users\Nikita\source\repos\OpenTKTest\BezierSurface\bin\Debug\net5.0\GlmSharp.dll
 C:\Users\Nikita\source\repos\OpenTKTest\BezierSurface\bin\Debug\net5.0\OpenTK.Compute.dll
 C:\Users\Nikita\source\repos\OpenTKTest\BezierSurface\bin\Debug\net5.0\OpenTK.Core.dll
 C:\Users\Nikita\source\repos\OpenTKTest\BezierSurface\bin\Debug\net5.0\OpenTK.Graphics.dll

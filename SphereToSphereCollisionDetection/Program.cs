@@ -68,13 +68,7 @@ namespace SphereToSphereCollisionDetection
             {
                 sphereCollider.Parent.Material.Color = new vec3(0, 1, 0);
                 var reflected = 2 * result.Normal * (glm.dot(result.Normal, V));
-                /*var line = new Line3D(new Line()
-                {
-                    Point = result.Point, Direction = result.Normal
-                });
-                line.Material.Color = new vec3(1, 0, 0);
-                toDraw.Add(line);*/
-                    _sphere.TranslateWorld(_sphere.WorldPosition - reflected);
+                _sphere.TranslateWorld(_sphere.WorldPosition - reflected);
             }
             else
                 sphereCollider.Parent.Material.Color = new vec3(0.5f);

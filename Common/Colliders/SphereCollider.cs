@@ -83,24 +83,27 @@ namespace Common.Colliders
             return false;
         }
 
-        public bool IsIntersectsPlane(PlaneCollider planeCollider, vec3 movingDirection, out object o)
+        public bool IsIntersectsWithInfinitePlane(PlaneCollider planeCollider, vec3 movingDirection, out RaycastHit result)
         {
             var P1 = WorldPosition;
-            var V = glm.normalize(movingDirection);
+            var V = movingDirection;
 
             var D = -glm.dot(planeCollider.Plane.Normal, planeCollider.Plane.D);
             var L = planeCollider.Plane.Normal;
 
-            var upper = -(glm.dot(L, P1) + D);
-            var lower =  (glm.dot(L, V) + D);
-            var t = upper / lower;
-            if(!float.IsNaN(t))
-            {
-                var r = glm.dot(planeCollider.Plane.Normal, P1) + D;
-                var C = P1 + t * V - r * planeCollider.Plane.Normal;
-                Console.WriteLine(C);
-            }
-            o = null;
+                var distanceBetweenSphereAndPlane = glm.dot(planeCollider.Plane.Normal, P1) + D;
+                if (distanceBetweenSphereAndPlane <= _radius)
+                {
+                    var dir = -1*planeCollider.Plane.Normal * distanceBetweenSphereAndPlane;
+                    var point = WorldPosition + dir;
+
+                    result = new RaycastHit()
+                    {
+                        Point = point, Normal = planeCollider.Plane.Normal
+                    };
+                    return true;
+                }
+                result = null;
             return false;
         }
         
