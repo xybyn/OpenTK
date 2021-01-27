@@ -54,3 +54,8 @@ C:\Users\Nikita\source\repos\OpenTKTest\OpenTKTest\bin\Debug\net5.0\Shaders\3D\c
 C:\Users\Nikita\source\repos\OpenTKTest\OpenTKTest\bin\Debug\net5.0\GlmSharp.dll
 C:\Users\Nikita\source\repos\OpenTKTest\OpenTKTest\bin\Debug\net5.0\Shaders\3D\parametricFunction.frag
 C:\Users\Nikita\source\repos\OpenTKTest\OpenTKTest\bin\Debug\net5.0\Shaders\3D\parametricFunction.vert
+C:\Users\Nikita\source\repos\OpenTKTest\OpenTKTest\bin\Debug\net5.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Nikita\source\repos\OpenTKTest\OpenTKTest\bin\Debug\net5.0\System.Drawing.Common.dll
+C:\Users\Nikita\source\repos\OpenTKTest\OpenTKTest\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Nikita\source\repos\OpenTKTest\OpenTKTest\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Nikita\source\repos\OpenTKTest\OpenTKTest\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll

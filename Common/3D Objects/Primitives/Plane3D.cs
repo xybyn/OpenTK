@@ -32,7 +32,10 @@ namespace Common
             }
             float[] vertices = new[]
             {
-                -0.5f, 0, -0.5f, 0.5f, 0, -0.5f, 0.5f, 0, 0.5f, -0.5f, 0, 0.5f
+                -0.5f, 0, -0.5f,
+                0.5f, 0, -0.5f, 
+                0.5f, 0, 0.5f,
+                -0.5f, 0, 0.5f
             };
             uint[] indices = new uint[]
             {

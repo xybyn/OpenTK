@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "ABjjr4gLatvRe0OJnupxGzAETtyf4jjFjxiNqFoegLdD6LY3TVGdFBNGdvEOr2QOwkORk7fbt+xYrGuakIYMyA==",
+  "dgSpecHash": "BKoe6JOThLtQ+PYBidus06JwFtoFy8Ne2UH8aEzOKPFSNDQ4LwDez1Be08XP6GMXVC/bKUjod1AJg38sfjIzfQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Nikita\\source\\repos\\OpenTKTest\\OpenTKTest\\OpenTKTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nikita\\.nuget\\packages\\glmnet\\0.7.0\\glmnet.0.7.0.nupkg.sha512",
     "C:\\Users\\Nikita\\.nuget\\packages\\glmsharp\\0.9.8\\glmsharp.0.9.8.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\Nikita\\.nuget\\packages\\opentk\\4.4.0\\opentk.4.4.0.nupkg.sha512",
     "C:\\Users\\Nikita\\.nuget\\packages\\opentk.compute\\4.4.0\\opentk.compute.4.4.0.nupkg.sha512",
     "C:\\Users\\Nikita\\.nuget\\packages\\opentk.core\\4.4.0\\opentk.core.4.4.0.nupkg.sha512",
@@ -16,7 +18,8 @@
     "C:\\Users\\Nikita\\.nuget\\packages\\opentk.redist.glfw\\3.3.0-pre20200830200122\\opentk.redist.glfw.3.3.0-pre20200830200122.nupkg.sha512",
     "C:\\Users\\Nikita\\.nuget\\packages\\opentk.windowing.common\\4.4.0\\opentk.windowing.common.4.4.0.nupkg.sha512",
     "C:\\Users\\Nikita\\.nuget\\packages\\opentk.windowing.desktop\\4.4.0\\opentk.windowing.desktop.4.4.0.nupkg.sha512",
-    "C:\\Users\\Nikita\\.nuget\\packages\\opentk.windowing.graphicslibraryframework\\4.4.0\\opentk.windowing.graphicslibraryframework.4.4.0.nupkg.sha512"
+    "C:\\Users\\Nikita\\.nuget\\packages\\opentk.windowing.graphicslibraryframework\\4.4.0\\opentk.windowing.graphicslibraryframework.4.4.0.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512"
   ],
   "logs": [
     {

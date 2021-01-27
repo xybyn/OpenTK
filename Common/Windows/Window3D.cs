@@ -42,7 +42,7 @@ namespace Common.Windows
             toDraw.Add(mainAxis);
         }
 
-        protected void AddGrid(int horizontalDivisions = 21, int verticalDivisions = 21)
+        protected void AddGrid(int horizontalDivisions = 20, int verticalDivisions = 20)
         {
             var grid = new Grid3D(horizontalDivisions, verticalDivisions)
             {

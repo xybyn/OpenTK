@@ -7,12 +7,12 @@ in vec3 FragPos;
 void main()
 {
     // Ambient
-    vec3 lightPosition = vec3(0, 4, 0);
+    vec3 lightPosition = vec3(5, 0, 10);
     vec3 resultColor= vec3(0.56,0,0.1 );
 
     vec3 directionToLight = lightPosition - FragPos;
     float distance = length(directionToLight);
     directionToLight = normalize(directionToLight);
-    float strength = max(dot(directionToLight, Normal), 0.3) ;
+    float strength = max(dot(directionToLight, Normal), 0.4);
     color = vec4(vec3(0.9, 0.9, 0)*strength, 1);
 }

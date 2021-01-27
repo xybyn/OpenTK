@@ -30,23 +30,23 @@ namespace Common._3D_Objects
             float horizontalStep = (xMax - xMin) / (horizontalDivisions - 1);
             float verticalStep = (yMax - yMin) / (verticalDivisions - 1);
             float x = xMin;
-            for (int i = 0; i < horizontalDivisions; i++)
+            for (int i = 0; i < horizontalDivisions+1; i++)
             {
                 vertices.Add(new vec3(x, 0, yMin));
                 vertices.Add(new vec3(x, 0, yMax));
                 indices.Add((uint)i * 2);
                 indices.Add(((uint)i * 2) + 1);
-                x += horizontalStep;
+                x += cellSize;
             }
 
             float y = yMin;
-            for (int i = 0; i < horizontalDivisions; i++)
+            for (int i = 0; i < horizontalDivisions+1; i++)
             {
                 vertices.Add(new vec3(xMin, 0, y));
                 vertices.Add(new vec3(xMax, 0, y));
                 indices.Add((uint)(i + horizontalDivisions) * 2);
                 indices.Add(((uint)(i + horizontalDivisions) * 2) + 1);
-                y += verticalStep;
+                y += cellSize;
             }
 
             InitializeVAO_VBO_EBO(vertices.ToSingleArray(), indices.ToArray());
