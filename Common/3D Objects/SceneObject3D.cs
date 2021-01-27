@@ -20,7 +20,7 @@ namespace Common._3D_Objects
         private readonly List<SceneObject3D> _children = new();
         private readonly Shader _normalsShader;
 
-        private EBO ebo;
+        protected EBO ebo;
 
         protected int indicesCount;
 
@@ -31,7 +31,7 @@ namespace Common._3D_Objects
         public mat4 translation = mat4.identity();
         protected VAO vao;
 
-        private VBO vbo;
+        protected VBO vbo;
 
         public SceneObject3D()
         {
@@ -210,7 +210,7 @@ namespace Common._3D_Objects
         {
             var parentModel = Parent.Model;
             var color = Material.Color;
-            
+
             shader.SetMat4("parentModel", ref parentModel);
             shader.SetVec3("color", ref color);
             shader.SetMat4("view", ref view);

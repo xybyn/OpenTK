@@ -74,7 +74,8 @@ namespace SurfaceDemo
         protected override void OnUpdateFrame(FrameEventArgs args)
         {
             base.OnUpdateFrame(args);
-            _dynamicSurface.SetNewFunction((x, z) => Sin((float)GLFW.GetTime() * 3f + x * z) / 5f, false);
+            _dynamicSurface.SetNewVertices((x, z) => Sin((float)GLFW.GetTime() * 3f + x * z) / 5f, false);
+
         }
     }
 }
