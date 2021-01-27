@@ -1,92 +1,37 @@
-﻿using Common.Buffers;
+﻿using Common._3D_Objects;
+using Common.Buffers;
+using Common.Colliders;
+using Common.Extensions;
 using Common.MathAbstractions;
 using Common.Misc;
 using Common.Shaders;
 using GlmNet;
 using OpenTK.Graphics.OpenGL4;
 using System;
+using System.Collections.Generic;
 
 namespace Common.Drawers
 {
-    public class Line3D
+    public class Line3D : Collider
     {
-        private readonly float[] vertices = new float[6];
-        private readonly Shader shader;
-        private Line line;
-
-        public void SetLine(Line newLine)
-        {
-            line = newLine;
-            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo.ProgramID);
-            float v = line.Point.x;
-            GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, sizeof(float), ref v);
-            v = line.Point.y;
-            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(1 * sizeof(float)), sizeof(float), ref v);
-            v = line.Point.z;
-            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(2 * sizeof(float)), sizeof(float), ref v);
-            v = line.Direction.x;
-            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(3 * sizeof(float)), sizeof(float), ref v);
-            v = line.Direction.y;
-            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(4 * sizeof(float)), sizeof(float), ref v);
-            v = line.Direction.z;
-            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(5 * sizeof(float)), sizeof(float), ref v);
-        }
-
-        public void SetStartX(float newX)
-        {
-            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo.ProgramID);
-            GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, sizeof(float), ref newX);
-        }
-
-        public void SetStartY(float v)
-        {
-            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo.ProgramID);
-            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)sizeof(float), sizeof(float), ref v);
-        }
-
-        public void SetStartZ(float v)
-        {
-            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo.ProgramID);
-            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(2 * sizeof(float)), sizeof(float), ref v);
-        }
-
-        private readonly VBO vbo;
-        private readonly VAO vao;
+  
 
         public Line3D(Line line)
         {
-            shader = new Shader(@"Shaders\Point\point3D.vert", @"Shaders\Point\point3D.frag");
-            vertices[0] = line.Point.x;
-            vertices[1] = line.Point.y;
-            vertices[2] = line.Point.z;
-            vertices[3] = line.Direction.x;
-            vertices[4] = line.Direction.y;
-            vertices[5] = line.Direction.z;
-            vbo = new VBO(vertices, sizeof(float) * vertices.Length);
-            vao = new VAO(vbo, new[]
+            var vertices = new List<vec3>
             {
-                new VertexAttribPointer
-                {
-                    Size = 3,
-                    Index = 0,
-                    Normalize = false,
-                    OffsetInBytes = 0,
-                    StrideInBytes = 3 * sizeof(float),
-                    Type = VertexAttribPointerType.Float
-                }
-            });
+                line.Point,line.Point+ line.Direction
+            };
+            var indices = new uint[]
+            {
+                0, 1
+            };
+            InitializeVAO_VBO_EBO(vertices.ToSingleArray(), indices);
         }
 
-        public void Draw(ref mat4 view, ref mat4 projection)
+        public override bool IntersectsRay(vec3 rayDirection, vec3 rayOrigin, out RaycastHit result)
         {
-            mat4 model = mat4.identity();
-
-            shader.Use();
-            shader.SetMat4("projection", ref projection);
-            shader.SetMat4("model", ref model);
-            shader.SetMat4("view", ref view);
-            vao.Bind();
-            GL.DrawArrays(PrimitiveType.Lines, 0, 2);
+            throw new NotImplementedException();
         }
     }
 }

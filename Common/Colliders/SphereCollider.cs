@@ -1,9 +1,11 @@
 ﻿// unset
 
 using Common.Extensions;
+using Common.Misc;
 using GlmNet;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using static System.MathF;
 
 namespace Common.Colliders
@@ -53,7 +55,7 @@ namespace Common.Colliders
             Material.Color = new vec3(0, 1, 0);
         }
 
-        public override bool IntersectsRay(vec3 rayDirection, vec3 rayOrigin, out float result)
+        public override bool IntersectsRay(vec3 rayDirection, vec3 rayOrigin, out RaycastHit result)
         {
             vec3 k = rayOrigin - WorldPosition;
             var b = glm.dot(k, rayDirection);
@@ -69,10 +71,15 @@ namespace Common.Colliders
                 var maxt = MathF.Min(t1, t2);
 
                 float t = (mint >= 0) ? mint : maxt;
-                result = t;
+                var intersectedPoint = rayDirection * t + rayOrigin;
+                result = new RaycastHit()
+                {
+                    Point =intersectedPoint,
+                    Normal = glm.normalize(intersectedPoint-WorldPosition)
+                };
                 return true;
             }
-            result = 0;
+            result = null;
             return false;
         }
     }

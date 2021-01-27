@@ -2,12 +2,15 @@
 
 using Common;
 using Common.Colliders;
+using Common.Drawers;
+using Common.MathAbstractions;
 using Common.Physics3D;
 using Common.Windows;
 using GlmNet;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using System;
 using System.Collections.Generic;
 
 namespace RayCastDemo
@@ -15,8 +18,10 @@ namespace RayCastDemo
     public class RayCastDemo3DWindow : Window3D
     {
         private List<Collider> colliders = new List<Collider>();
+        private List<Line3D> lines = new();
 
-        public RayCastDemo3DWindow(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
+        public RayCastDemo3DWindow(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings,
+            nativeWindowSettings)
         {
             var sphere1 = new Sphere(0.5f);
             sphere1.TranslateWorld(new vec3(4, 1, 0));
@@ -69,6 +74,15 @@ namespace RayCastDemo
             AddMainCoordinatesAxis();
         }
 
+        protected override void OnUpdateFrame(FrameEventArgs args)
+        {
+            base.OnUpdateFrame(args);
+            foreach (var VARIABLE in lines)
+            {
+                VARIABLE.Draw(ref view, ref projection);
+            }
+        }
+
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
             if (e.Button == MouseButton.Left)
@@ -90,13 +104,24 @@ namespace RayCastDemo
                     collider.Parent.Material.Color = new vec3(0, 0.5f, 0);
 
                     var point = new Sphere(0.05f);
-                    point.TranslateWorld(ray*result+position);
+                    point.TranslateWorld(result.Point);
+                    Console.WriteLine(result.Normal);
                     toDraw.Add(point);
+                    toDraw.Add(new Line3D(new Line
+                    {
+                        Direction = result.Normal, Point = result.Point
+                    })
+                    {
+                        Material =
+                        {
+                            Color = new vec3(1, 0, 0)
+                        }
+                    });
+                    return;
                 }
-                else
-                {
-                    collider.Parent.Material.Color = new vec3(0.5f);
-                }
+
+                collider.Parent.Material.Color = new vec3(0.5f);
+
             }
         }
     }

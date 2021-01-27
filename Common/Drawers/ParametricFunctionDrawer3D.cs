@@ -13,9 +13,9 @@ namespace Common.Drawers
 {
     public class ParametricFunctionDrawer3D : SceneObject3D
     {
-        private ParametricFunctionDrawerSettings _settings;
-        private List<vec3> vertices = new();
-        private List<uint> indices = new();
+        private readonly ParametricFunctionDrawerSettings _settings;
+        private readonly List<vec3> _vertices = new();
+        private readonly List<uint> _indices = new();
 
         public ParametricFunctionDrawer3D(Func<float, vec3> func, ParametricFunctionDrawerSettings settings)
         {
@@ -26,24 +26,24 @@ namespace Common.Drawers
 
         public void SetFunction(Func<float, vec3> func)
         {
-            vertices.Clear();
-            indices.Clear();
+            _vertices.Clear();
+            _indices.Clear();
             ClearBuffers();
 
             var step = (_settings.MaxParameterValue - _settings.MinParameterValue) / (_settings.CountOfDivisions - 1);
             var t = _settings.MinParameterValue;
             for (int i = 0; i < _settings.CountOfDivisions; i++)
             {
-                vertices.Add(func(t));
+                _vertices.Add(func(t));
                 t += step;
             }
 
-            for (uint i = 0; i < vertices.Count - 1; i++)
+            for (uint i = 0; i < _vertices.Count - 1; i++)
             {
-                indices.Add(i);
-                indices.Add(i + 1);
+                _indices.Add(i);
+                _indices.Add(i + 1);
             }
-            InitializeVAO_VBO_EBO(vertices.ToSingleArray(), indices.ToArray());
+            InitializeVAO_VBO_EBO(_vertices.ToSingleArray(), _indices.ToArray());
         }
 
         public override void Draw(ref mat4 view, ref mat4 projection)

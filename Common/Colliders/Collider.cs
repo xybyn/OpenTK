@@ -1,6 +1,7 @@
 ﻿// unset
 
 using Common._3D_Objects;
+using Common.Misc;
 using Common.Shaders;
 using GlmNet;
 using OpenTK.Graphics.OpenGL4;
@@ -24,6 +25,6 @@ namespace Common.Colliders
             GL.DrawElements(PrimitiveType.Lines, indicesCount, DrawElementsType.UnsignedInt, 0);
         }
 
-        public abstract bool IntersectsRay(vec3 rayDirection, vec3 rayOrigin, out float result);
+        public abstract bool IntersectsRay(vec3 rayDirection, vec3 rayOrigin, out RaycastHit result);
     }
 }

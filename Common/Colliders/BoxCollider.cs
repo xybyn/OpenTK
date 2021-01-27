@@ -1,5 +1,6 @@
 ﻿// unset
 
+using Common.Misc;
 using GlmNet;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,9 +34,9 @@ namespace Common.Colliders
             }
         }
 
-        public override bool IntersectsRay(vec3 rayDirection, vec3 rayOrigin, out float result)
+        public override bool IntersectsRay(vec3 rayDirection, vec3 rayOrigin, out RaycastHit result)
         {
-            var results = new List<float>();
+            var results = new List<RaycastHit>();
             foreach (var planeCollider in _planeColliders)
             {
                 if (planeCollider.IntersectsRay(rayDirection, rayOrigin, out var res))
@@ -45,10 +46,13 @@ namespace Common.Colliders
             }
             if (results.Count == 0)
             {
-                result = 0;
+                result = null;
                 return false;
             }
-            var min = results.Min();
+            var min = 
+                (from r in results 
+                orderby glm.dot(r.Point - rayOrigin, r.Point - rayOrigin) 
+                select r).First();
             result = min;
             return true;
         }

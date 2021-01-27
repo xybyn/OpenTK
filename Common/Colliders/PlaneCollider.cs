@@ -2,6 +2,7 @@
 
 using Common.Extensions;
 using Common.MathAbstractions;
+using Common.Misc;
 using GlmNet;
 using System;
 using System.Collections.Generic;
@@ -78,14 +79,14 @@ namespace Common.Colliders
             TranslateWorld(pos);
         }
 
-        public override bool IntersectsRay(vec3 rayDirection, vec3 rayOrigin, out float result)
+        public override bool IntersectsRay(vec3 rayDirection, vec3 rayOrigin, out RaycastHit result)
         {
             var v = rayDirection;
             var p = rayOrigin;
             var dominator = glm.dot(Plane.Normal, v);
             if (dominator == 0)
             {
-                result = 0;
+                result = null;
                 return false;
             }
 
@@ -95,10 +96,14 @@ namespace Common.Colliders
             if (intersectionPoint.x > LocalScaling.x / 2f || intersectionPoint.x < -LocalScaling.x / 2f
                                                           || intersectionPoint.z > LocalScaling.y / 2f || intersectionPoint.z < -LocalScaling.y / 2f)
             {
-                result = 0;
+                result = null;
                 return false;
             }
-            result = t;
+            result = new RaycastHit
+            {
+                Normal = Plane.Normal,
+                Point =  rayOrigin + t * rayDirection
+            };
             return true;
         }
     }
