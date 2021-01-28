@@ -20,19 +20,15 @@ namespace Common._3D_Objects
         private readonly List<SceneObject3D> _children = new();
         private readonly Shader _normalsShader;
 
-        protected EBO ebo;
-
-        protected int indicesCount;
-
         private mat4 _rotationMatrix = mat4.identity();
         private mat4 _scaling = mat4.identity();
-        protected Shader shader;
 
         private mat4 _translationMatrix = mat4.identity();
 
-        public mat4 TranslationMatrix => _translationMatrix;
-        public mat4 RotationMatrix => _rotationMatrix;
-        public mat4 ScalingMatrix => _scaling;
+        protected EBO ebo;
+
+        protected int indicesCount;
+        protected Shader shader;
         protected VAO vao;
 
         protected VBO vbo;
@@ -58,11 +54,15 @@ namespace Common._3D_Objects
                 DEFAULT_NORMALS_SHADER_GEOM_PATH);
         }
 
+        public mat4 TranslationMatrix => _translationMatrix;
+        public mat4 RotationMatrix => _rotationMatrix;
+        public mat4 ScalingMatrix => _scaling;
+
         public virtual mat4 Model => ParentModel * _translationMatrix * _rotationMatrix * _scaling;
         public mat4 LocalModel => _translationMatrix * _rotationMatrix * _scaling;
 
         public virtual mat4 ParentModel => Parent.Model;
-        public virtual mat4 ParentModelWithoutRotation => Parent.ParentModelWithoutRotation*TranslationMatrix*ScalingMatrix;
+        public virtual mat4 ParentModelWithoutRotation => Parent.ParentModelWithoutRotation * TranslationMatrix * ScalingMatrix;
         public Material Material { get; set; }
 
         public bool ShowNormals { get; set; }
@@ -75,7 +75,7 @@ namespace Common._3D_Objects
 
         public vec3 LocalPosition { get; private set; }
 
-        public vec3 LocalScaling { get; private set; } = new vec3(1);
+        public vec3 LocalScaling { get; private set; } = new(1);
 
         public void AttachTo(SceneObject3D parent)
         {
@@ -201,7 +201,7 @@ namespace Common._3D_Objects
                     }
                 });
         }
-        
+
         protected void InitializeVAO_VBO_EBO(List<vec3> vertices, List<uint> indices)
         {
             InitializeVAO_VBO_EBO(vertices.ToSingleArray(), indices.ToArray());
@@ -209,8 +209,8 @@ namespace Common._3D_Objects
 
         protected virtual void UpdateDefaultShader(ref mat4 view, ref mat4 projection)
         {
-            var parentModel = ParentModel;
-            var color = Material.Color;
+            mat4 parentModel = ParentModel;
+            vec3 color = Material.Color;
 
             shader.SetMat4("parentModel", ref parentModel);
             shader.SetVec3("color", ref color);
@@ -223,7 +223,7 @@ namespace Common._3D_Objects
 
         private void DrawNormals(ref mat4 view, ref mat4 projection)
         {
-            var model = Model;
+            mat4 model = Model;
             _normalsShader.Use();
             _normalsShader.SetMat4("projection", ref projection);
             _normalsShader.SetMat4("model", ref model);

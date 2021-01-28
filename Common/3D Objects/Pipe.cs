@@ -17,29 +17,29 @@ namespace Common._3D_Objects
         private readonly List<List<vec3>> _normals = new();
         private List<vec3> _path = new();
         private float[] _vertices;
-        
-        public Pipe(){}
+
+        public Pipe()
+        {
+        }
 
         public Pipe(Func<List<vec3>> pathFunc, Func<List<vec3>> contourFunc = null)
         {
             SetNewFunctions(pathFunc, contourFunc);
         }
 
-        public void SetNewFunctions(Func<List<vec3>> pathFunc, Func<List<vec3>> contourFunc=null)
+        public void SetNewFunctions(Func<List<vec3>> pathFunc, Func<List<vec3>> contourFunc = null)
         {
             ClearBuffers();
             _contour.Clear();
             _contours.Clear();
             _normals.Clear();
             _path.Clear();
-            
+
             _contour = contourFunc != null ? contourFunc() : GetCirclePoints(0.1f, 40);
             _path = pathFunc();
 
             CalculateVertexNormalsIndices();
         }
-        
-        
 
         public Pipe(IEnumerable<vec3> path, Func<List<vec3>> contourFunc = null)
         {
@@ -126,7 +126,8 @@ namespace Common._3D_Objects
             // define plane equation at toIndex with normal and point
             Plane plane = new()
             {
-                Normal = normal, D = _path[toIndex]
+                Normal = normal,
+                D = _path[toIndex]
             };
 
             // project each vertex of contour to the plane
@@ -153,7 +154,7 @@ namespace Common._3D_Objects
             {
                 // transform matrix
                 if (pathCount > 1)
-                    /*matrix = glm.lookAt(new vec3(0, 0, 0), path[1]-path[0], new vec3(0, 1, 0));*/
+                /*matrix = glm.lookAt(new vec3(0, 0, 0), path[1]-path[0], new vec3(0, 1, 0));*/
                 {
                     vec3 normal = new(0, 1, 0);
                     vec3 target = _path[1] - _path[0];

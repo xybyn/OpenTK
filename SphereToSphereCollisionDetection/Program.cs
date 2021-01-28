@@ -9,12 +9,13 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace SphereToSphereCollisionDetection
 {
-    class CollisionDetectionWindow3D : Window3D
+    internal class CollisionDetectionWindow3D : Window3D
     {
-        readonly Sphere _sphere;
-            SphereCollider sphereCollider;
-            SphereCollider sphereCollider2;
-            PlaneCollider planeCollider;
+        private readonly Sphere _sphere;
+        private SphereCollider sphereCollider;
+        private SphereCollider sphereCollider2;
+        private InfinitePlaneCollider _infinitePlaneCollider;
+
         public CollisionDetectionWindow3D(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
         {
             AddGrid();
@@ -41,19 +42,19 @@ namespace SphereToSphereCollisionDetection
             base.OnUpdateFrame(args);
             if (KeyboardState.IsKeyDown(Keys.W))
             {
-                _sphere.TranslateWorld(_sphere.WorldPosition + new vec3(0, (float)args.Time,0 ));
+                _sphere.TranslateWorld(_sphere.WorldPosition + new vec3(0, (float)args.Time, 0));
             }
             if (KeyboardState.IsKeyDown(Keys.S))
             {
-                _sphere.TranslateWorld(_sphere.WorldPosition - new vec3(0, (float)args.Time,0 ));
+                _sphere.TranslateWorld(_sphere.WorldPosition - new vec3(0, (float)args.Time, 0));
             }
             if (KeyboardState.IsKeyDown(Keys.A))
             {
-                _sphere.TranslateWorld(_sphere.WorldPosition + new vec3((float)args.Time , 0,0));
+                _sphere.TranslateWorld(_sphere.WorldPosition + new vec3((float)args.Time, 0, 0));
             }
             if (KeyboardState.IsKeyDown(Keys.D))
             {
-                _sphere.TranslateWorld(_sphere.WorldPosition - new vec3((float)args.Time , 0,0));
+                _sphere.TranslateWorld(_sphere.WorldPosition - new vec3((float)args.Time, 0, 0));
             }
             if (KeyboardState.IsKeyDown(Keys.Q))
             {
@@ -72,14 +73,15 @@ namespace SphereToSphereCollisionDetection
             }
             else
                 sphereCollider.Parent.Material.Color = new vec3(0.5f);
-            lastPosition= _sphere.WorldPosition;
+            lastPosition = _sphere.WorldPosition;
         }
 
         private vec3 lastPosition = new vec3(0);
     }
-    class Program
+
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var settings = GameWindowSettings.Default;
             var nativeWindowSettings = new NativeWindowSettings

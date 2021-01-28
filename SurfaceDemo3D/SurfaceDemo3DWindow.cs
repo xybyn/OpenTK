@@ -1,6 +1,5 @@
 ﻿// unset
 
-using Common;
 using Common._3D_Objects;
 using Common.Drawers.Settings;
 using Common.Windows;
@@ -14,7 +13,8 @@ namespace SurfaceDemo
 {
     public class SurfaceDemo3DWindow : Window3D
     {
-        readonly Surface _dynamicSurface;
+        private readonly Surface _dynamicSurface;
+
         public SurfaceDemo3DWindow(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings,
             nativeWindowSettings)
         {
@@ -37,16 +37,15 @@ namespace SurfaceDemo
                     1 * Sin(u) * Cos(v),
                     1 * Sin(v)
                 ), new SurfaceDrawer3DSettings
-            {
-                MaxX = 2 * PI,
-                MinX = 0,
-                MaxZ = PI / 2,
-                MinZ = -PI / 2,
-                NumberOfPartitions = 60
-            }, true);
+                {
+                    MaxX = 2 * PI,
+                    MinX = 0,
+                    MaxZ = PI / 2,
+                    MinZ = -PI / 2,
+                    NumberOfPartitions = 60
+                }, true);
             surface2.TranslateWorld(new vec3(5, 3, 0));
             surface2.Material.Color = new vec3(0.6f, 0, 0.6f);
-
 
             toDraw.Add(surface2);
 
@@ -57,7 +56,7 @@ namespace SurfaceDemo
                         r * Sin(ksi),
                         (R + r * Cos(ksi)) * Sin(phi))
                 ,
- 
+
             new SurfaceDrawer3DSettings()
             {
                 NumberOfPartitions = 60,
@@ -75,7 +74,6 @@ namespace SurfaceDemo
         {
             base.OnUpdateFrame(args);
             _dynamicSurface.SetNewVertices((x, z) => Sin((float)GLFW.GetTime() * 3f + x * z) / 5f, false);
-
         }
     }
 }

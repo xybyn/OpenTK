@@ -14,6 +14,7 @@ namespace Utils
 
             return factorial;
         }
+
         public static List<float> GetCircle(float r, int sectorCount)
         {
             float sectorStep = 2 * PI / sectorCount;

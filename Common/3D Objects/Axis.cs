@@ -15,6 +15,7 @@ namespace Common._3D_Objects
         private const float HEIGHT = 1;
         private const float SPHERE_RADIUS = 0.06f;
         private const float COLOR_INTENSITY = 0.6f;
+
         public Axis()
         {
             float height = HEIGHT;

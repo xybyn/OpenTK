@@ -1,24 +1,21 @@
 ﻿using Common;
 using Common.Colliders;
-using Common.Drawers;
-using Common.MathAbstractions;
-using Common.Misc;
 using Common.Windows;
 using GlmNet;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using System;
 
 namespace CollisionDetection
 {
-    class CollisionDetectionWindow3D : Window3D
+    internal class CollisionDetectionWindow3D : Window3D
     {
-        readonly Sphere _sphere;
-            SphereCollider sphereCollider;
-            SphereCollider sphereCollider2;
-            PlaneCollider planeCollider;
+        private readonly Sphere _sphere;
+        private SphereCollider sphereCollider;
+        private SphereCollider sphereCollider2;
+        private InfinitePlaneCollider _infinitePlaneCollider;
+
         public CollisionDetectionWindow3D(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
         {
             AddGrid();
@@ -45,19 +42,19 @@ namespace CollisionDetection
             base.OnUpdateFrame(args);
             if (KeyboardState.IsKeyDown(Keys.W))
             {
-                _sphere.TranslateWorld(_sphere.WorldPosition + new vec3(0, (float)args.Time,0 ));
+                _sphere.TranslateWorld(_sphere.WorldPosition + new vec3(0, (float)args.Time, 0));
             }
             if (KeyboardState.IsKeyDown(Keys.S))
             {
-                _sphere.TranslateWorld(_sphere.WorldPosition - new vec3(0, (float)args.Time,0 ));
+                _sphere.TranslateWorld(_sphere.WorldPosition - new vec3(0, (float)args.Time, 0));
             }
             if (KeyboardState.IsKeyDown(Keys.A))
             {
-                _sphere.TranslateWorld(_sphere.WorldPosition + new vec3((float)args.Time , 0,0));
+                _sphere.TranslateWorld(_sphere.WorldPosition + new vec3((float)args.Time, 0, 0));
             }
             if (KeyboardState.IsKeyDown(Keys.D))
             {
-                _sphere.TranslateWorld(_sphere.WorldPosition - new vec3((float)args.Time , 0,0));
+                _sphere.TranslateWorld(_sphere.WorldPosition - new vec3((float)args.Time, 0, 0));
             }
             if (KeyboardState.IsKeyDown(Keys.Q))
             {
@@ -78,18 +75,19 @@ namespace CollisionDetection
                 });
                 line.Material.Color = new vec3(1, 0, 0);
                 toDraw.Add(line);*/
-                    _sphere.TranslateWorld(_sphere.WorldPosition - reflected);
+                _sphere.TranslateWorld(_sphere.WorldPosition - reflected);
             }
             else
                 sphereCollider.Parent.Material.Color = new vec3(0.5f);
-            lastPosition= _sphere.WorldPosition;
+            lastPosition = _sphere.WorldPosition;
         }
 
         private vec3 lastPosition = new vec3(0);
     }
-    class Program
+
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var settings = GameWindowSettings.Default;
             var nativeWindowSettings = new NativeWindowSettings

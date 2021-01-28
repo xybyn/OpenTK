@@ -13,6 +13,7 @@ namespace Common.MathAbstractions
             get => glm.normalize(_normal);
             init => _normal = value;
         }
+
         public vec3 D { get; set; }
 
         public vec3 Intersect(Line line)

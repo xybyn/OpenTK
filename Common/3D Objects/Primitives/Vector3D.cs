@@ -2,7 +2,6 @@
 
 using Common._3D_Objects;
 using GlmNet;
-using OpenTK.Mathematics;
 
 namespace Common
 {
@@ -11,6 +10,7 @@ namespace Common
         private readonly Cylinder _cylinder;
         private const float CYLINDER_RADIUS = 0.05f;
         private const float CYLINDER_HEIGHT = 1;
+
         public Vector3D(string axisName)
         {
             AxisName = axisName;
@@ -18,6 +18,7 @@ namespace Common
             _cylinder.AttachTo(this);
             _cylinder.Material = Material;
         }
+
         public string AxisName { get; }
 
         public override void Draw(ref mat4 view, ref mat4 projection)

@@ -55,7 +55,7 @@ namespace RayCastDemo
             sphere4.TranslateWorld(new vec3(-2, 1, 0));
             sphere4.Material.Color = new vec3(0.5f);
             toDraw.Add(sphere4);
-            var planeCollider4 = new PlaneCollider(new vec3(1, 1, 0), new vec3(0, 0, 0));
+            var planeCollider4 = new FinitePlaneCollider(new vec3(1, 1, 0), new vec3(0, 0, 0));
             planeCollider4.AttachTo(sphere4);
             toDraw.Add(planeCollider4);
             colliders.Add(planeCollider4);
@@ -109,7 +109,8 @@ namespace RayCastDemo
                     toDraw.Add(point);
                     toDraw.Add(new Line3D(new Line
                     {
-                        Direction = result.Normal, Point = result.Point
+                        Direction = result.Normal,
+                        Point = result.Point
                     })
                     {
                         Material =
@@ -121,7 +122,6 @@ namespace RayCastDemo
                 }
 
                 collider.Parent.Material.Color = new vec3(0.5f);
-
             }
         }
     }

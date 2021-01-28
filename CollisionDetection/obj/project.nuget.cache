@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "dgSpecHash": "F5RrrlaCv8/CeZnwTpCs8qptVXIWomM1acYOPeE5Qqfw0Pcuo2Sjdnzzd45s597U9PwV6aV6W7trtc8TQ2udNA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Nikita\\source\\repos\\OpenTKTest\\CollisionDetection\\CollisionDetection.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Nikita\\.nuget\\packages\\glmnet\\0.7.0\\glmnet.0.7.0.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\opentk\\4.4.0\\opentk.4.4.0.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\opentk.compute\\4.4.0\\opentk.compute.4.4.0.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\opentk.core\\4.4.0\\opentk.core.4.4.0.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\opentk.graphics\\4.4.0\\opentk.graphics.4.4.0.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\opentk.input\\4.4.0\\opentk.input.4.4.0.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\opentk.mathematics\\4.4.0\\opentk.mathematics.4.4.0.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\opentk.openal\\4.4.0\\opentk.openal.4.4.0.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\opentk.redist.glfw\\3.3.0-pre20200830200122\\opentk.redist.glfw.3.3.0-pre20200830200122.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\opentk.windowing.common\\4.4.0\\opentk.windowing.common.4.4.0.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\opentk.windowing.desktop\\4.4.0\\opentk.windowing.desktop.4.4.0.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\opentk.windowing.graphicslibraryframework\\4.4.0\\opentk.windowing.graphicslibraryframework.4.4.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'GlmNet 0.7.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "libraryId": "GlmNet",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    }
+  ]
+}

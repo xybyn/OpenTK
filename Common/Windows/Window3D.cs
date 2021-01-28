@@ -48,7 +48,7 @@ namespace Common.Windows
             {
                 Material =
                 {
-                    Color = new vec3(0.5f)
+                    Color = new vec3(0.2f)
                 }
             };
 

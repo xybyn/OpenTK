@@ -4,6 +4,7 @@ using GlmNet;
 using OpenTK.Windowing.Common;
 using System;
 using System.Collections.Generic;
+
 //TODO: сделать полностью рабочим и сделать демонстрацию
 namespace Common._3D_Objects
 {
@@ -57,49 +58,72 @@ namespace Common._3D_Objects
             _colliders.Add(yCollider);
             _colliders.Add(zCollider);
 
+            /*foreach (Collider collider in _colliders)
+            {
+                collider.ShowColliders = true;
+                _toDraw.Add(collider);
+            }*/
+
             _toDraw.Add(sphere);
             _toDraw.Add(x);
             _toDraw.Add(y);
             _toDraw.Add(z);
         }
 
+        private vec3 lastHitPosition = new vec3(0);
+        private vec3 hitPosition;
         public void CheckCollision(vec3 ray, vec3 cameraPosition)
         {
-            foreach (Collider collider in _colliders)
-            {
-                if (collider.IsIntersectsRay(ray, cameraPosition, out var result))
+          
+                foreach (Collider collider in _colliders)
                 {
-                    string axisname = ((Vector3D)collider.Parent).AxisName;
-                    _axis = axisname;
-
-                    return;
+                    if (collider.IsIntersectsRay(ray, cameraPosition, out var result))
+                    {
+                        string axisname = ((Vector3D)collider.Parent).AxisName;
+                        _axis = axisname;
+                        hitPosition = result.Point;
+                        return;
+                    }
                 }
-            }
-            _axis = String.Empty;
+                _axis = String.Empty;
+            
         }
+        private bool isFirstClicked = true;
 
         public void OnMouseMove(MouseMoveEventArgs e, bool isPressed)
         {
             if (isPressed)
             {
-                Console.WriteLine(_axis);
-                if (_axis.Equals("x"))
+                var diff =  hitPosition-lastHitPosition;
+                
+                //Console.WriteLine(isFirstClicked);
+                if (!isFirstClicked)
                 {
-                    TranslateWorld(WorldPosition + new vec3(-e.DeltaX / 70f, 0, 0));
+                    if (_axis.Equals("x"))
+                    {
+                        TranslateWorld(WorldPosition + new vec3(diff.x, 0, 0));
+                    }
+                    else if (_axis.Equals("y"))
+                    {
+                        TranslateWorld(WorldPosition + new vec3(0, diff.y, 0));
+                    }
+                    else if (_axis.Equals("z"))
+                    {
+                        TranslateWorld(WorldPosition + new vec3(0, 0, diff.z));
+                    }
                 }
-                else if (_axis.Equals("y"))
-                {
-                    TranslateWorld(WorldPosition + new vec3(0, -e.DeltaY / 70f, 0));
-                }
-                else if (_axis.Equals("z"))
-                {
-                    TranslateWorld(WorldPosition + new vec3(0, 0, -e.DeltaX / 70f));
-                }
+                
+                isFirstClicked = false;
+
             }
             else
             {
                 _axis = string.Empty;
+                isFirstClicked = true;
+                lastHitPosition = new vec3(0);
+                hitPosition = new vec3(0);
             }
+            lastHitPosition = hitPosition;
         }
 
         public override void Draw(ref mat4 view, ref mat4 projection)

@@ -5,7 +5,6 @@ using Common.Misc;
 using GlmNet;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using static System.MathF;
 
 namespace Common.Colliders
@@ -13,6 +12,7 @@ namespace Common.Colliders
     public class SphereCollider : Collider
     {
         private readonly float _radius;
+
         public SphereCollider(float radius)
         {
             _radius = radius;
@@ -74,8 +74,8 @@ namespace Common.Colliders
                 var intersectedPoint = rayDirection * t + rayOrigin;
                 result = new RaycastHit()
                 {
-                    Point =intersectedPoint,
-                    Normal = glm.normalize(intersectedPoint-WorldPosition)
+                    Point = intersectedPoint,
+                    Normal = glm.normalize(intersectedPoint - WorldPosition)
                 };
                 return true;
             }
@@ -83,30 +83,139 @@ namespace Common.Colliders
             return false;
         }
 
-        public bool IsIntersectsWithInfinitePlane(PlaneCollider planeCollider, vec3 movingDirection, out RaycastHit result)
+        public bool IsIntersectsWithInfinitePlane(InfinitePlaneCollider infinitePlaneCollider, vec3 movingDirection, out RaycastHit result)
         {
             var P1 = WorldPosition;
             var V = movingDirection;
 
-            var D = -glm.dot(planeCollider.Plane.Normal, planeCollider.Plane.D);
-            var L = planeCollider.Plane.Normal;
+            var D = -glm.dot(infinitePlaneCollider.Plane.Normal, infinitePlaneCollider.Plane.D);
+            var L = infinitePlaneCollider.Plane.Normal;
 
-                var distanceBetweenSphereAndPlane = glm.dot(planeCollider.Plane.Normal, P1) + D;
-                if (distanceBetweenSphereAndPlane <= _radius)
+            var distanceBetweenSphereAndPlane = glm.dot(infinitePlaneCollider.Plane.Normal, P1) + D;
+            if (distanceBetweenSphereAndPlane <= _radius)
+            {
+                var dir = -1 * infinitePlaneCollider.Plane.Normal * distanceBetweenSphereAndPlane;
+                var point = WorldPosition + dir;
+
+                result = new RaycastHit()
                 {
-                    var dir = -1*planeCollider.Plane.Normal * distanceBetweenSphereAndPlane;
-                    var point = WorldPosition + dir;
-
-                    result = new RaycastHit()
-                    {
-                        Point = point, Normal = planeCollider.Plane.Normal
-                    };
-                    return true;
-                }
-                result = null;
+                    Point = point,
+                    Normal = infinitePlaneCollider.Plane.Normal
+                };
+                return true;
+            }
+            result = null;
             return false;
         }
         
+         public bool IsIntersectsAxisAlignedBox(AxisAlignedBoxCollider otherBox, out AxisAlignedBoxHit result)
+        {
+
+            var x =Max(otherBox.MinPoint.x, Min(WorldPosition.x, otherBox.MaxPoint.x));
+            var y = Max(otherBox.MinPoint.y, Min(WorldPosition.y, otherBox.MaxPoint.y));
+            var z =Max(otherBox.MinPoint.z, Min(WorldPosition.z, otherBox.MaxPoint.z));
+
+            //Console.WriteLine(new vec3(x, y, z));
+            var distance = Sqrt((x - WorldPosition.x) * (x - WorldPosition.x) +
+                                      (y - WorldPosition.y) * (y - WorldPosition.y) +
+                                      (z - WorldPosition.z) * (z - WorldPosition.z));
+
+            if (distance >= _radius)
+            {
+                result = null;
+                return false;
+            }
+            int side;
+
+            
+            x *= -MathF.Sign(otherBox.MaxPoint.x - WorldPosition.x);
+            y *= -MathF.Sign(otherBox.MaxPoint.y - WorldPosition.y);
+            z *= -MathF.Sign(otherBox.MaxPoint.z - WorldPosition.z);
+            
+            
+            bool isXMax = false;
+            bool isYMax = false;
+            bool isZMax = false;
+            
+            var max = x;
+            if (y > max)
+            {
+                max = y;
+            }
+            if (z > y)
+            {
+                max = z;
+                
+            }
+
+            if (x >= max)
+                isXMax = true;
+
+            if (y >= max)
+                isYMax = true;
+            if (z >= max)
+                isZMax = true;
+            
+            if (isYMax)
+            {
+                //y
+                side = -MathF.Sign(otherBox.MaxPoint.y - WorldPosition.y);
+                result = new AxisAlignedBoxHit
+                {
+                    Offset = new vec3(0, side*y, 0),
+                    Normal = new vec3(0, side, 0)
+                };
+                return true;
+            }
+            if (isZMax)
+            {
+                //z
+                side = -MathF.Sign(otherBox.MaxPoint.z - WorldPosition.z);
+                result = new AxisAlignedBoxHit
+                {
+                    Offset = new vec3(0, 0, side*z),
+                    Normal = new vec3(0, 0, side)
+                };
+                return true;
+            }
+            
+            //x
+
+                //determines colliding from left or right side
+                side = -MathF.Sign(otherBox.MaxPoint.x - WorldPosition.x);
+                result = new AxisAlignedBoxHit
+                {
+                    Offset = new vec3(side * x, 0, 0),
+                    Normal = new vec3(side, 0, 0)
+                };
+                return true;
+                
+        }
+        public bool IsIntersectsWithFinitePlane(FinitePlaneCollider infinitePlaneCollider, vec3 movingDirection, out RaycastHit result)
+        {
+            var P1 = WorldPosition;
+            var V = movingDirection;
+
+            var D = -glm.dot(infinitePlaneCollider.Plane.Normal, infinitePlaneCollider.Plane.D);
+            var L = infinitePlaneCollider.Plane.Normal;
+
+            var distanceBetweenSphereAndPlane = glm.dot(infinitePlaneCollider.Plane.Normal, P1) + D;
+            if (distanceBetweenSphereAndPlane <= _radius)
+            {
+                var dir = -1 * infinitePlaneCollider.Plane.Normal * distanceBetweenSphereAndPlane;
+                var point = WorldPosition + dir;
+
+                result = new RaycastHit()
+                {
+                    Point = point,
+                    Normal = infinitePlaneCollider.Plane.Normal
+                };
+                return true;
+            }
+            result = null;
+            return false;
+        }
+
         public bool IsIntersectsSphere(SphereCollider planeCollider, out RaycastHit result)
         {
             var p = WorldPosition - planeCollider.WorldPosition;
@@ -116,10 +225,11 @@ namespace Common.Colliders
             {
                 p = glm.normalize(p);
                 var point = planeCollider.WorldPosition + planeCollider._radius * p;
-                var normal = glm.normalize(point-planeCollider.WorldPosition);
+                var normal = glm.normalize(point - planeCollider.WorldPosition);
                 result = new RaycastHit()
                 {
-                    Point = point, Normal = normal
+                    Point = point,
+                    Normal = normal
                 };
                 return true;
             }

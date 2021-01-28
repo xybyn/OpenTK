@@ -1,6 +1,5 @@
 ﻿// unset
 
-using Common;
 using Common._3D_Objects;
 using Common.Windows;
 using GlmNet;
@@ -46,14 +45,15 @@ namespace ParametricSpiral
             _dynamicPipe = new Pipe();
             toDraw.Add(_dynamicPipe);
         }
-        readonly List<vec3> _list = new List<vec3>();
+
+        private readonly List<vec3> _list = new List<vec3>();
+
         protected override void OnUpdateFrame(FrameEventArgs args)
         {
             base.OnUpdateFrame(args);
 
             List<vec3> SpiralFunction()
             {
-                
                 float minT = 0f;
                 float maxT = 4 * PI;
                 float step = (maxT - minT) / (100 - 1);
@@ -61,7 +61,7 @@ namespace ParametricSpiral
                 for (int i = 0; i < 100; i++)
                 {
                     float x = (float)(t * Cos((float)(t + GLFW.GetTime() * 5)) / 5f);
-                    float y = (t+ Sin( (float)GLFW.GetTime())) * Sin((float)(t + GLFW.GetTime() * 5)) / 5f;
+                    float y = (t + Sin((float)GLFW.GetTime())) * Sin((float)(t + GLFW.GetTime() * 5)) / 5f;
                     _list.Add(new vec3(x, t / 5f, y));
                     t += step;
                 }

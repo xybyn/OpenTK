@@ -29,16 +29,18 @@ namespace Common._3D_Objects
         public void SetPositionForVertex(int i, int j, vec3 newPosition)
         {
             vbo.Bind();
-            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)((i*(3+_settings.NumberOfPartitions)+j*3) * sizeof(float)), sizeof(float), ref newPosition.x);
-            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)((i*(3+_settings.NumberOfPartitions)+j*3+1) * sizeof(float)), sizeof(float), ref newPosition.y);
-            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)((i*(3+_settings.NumberOfPartitions)+j*3+2) * sizeof(float)), sizeof(float), ref newPosition.z);
+            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(((i * (3 + _settings.NumberOfPartitions)) + (j * 3)) * sizeof(float)),
+                sizeof(float), ref newPosition.x);
+            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(((i * (3 + _settings.NumberOfPartitions)) + (j * 3) + 1) * sizeof(float)),
+                sizeof(float), ref newPosition.y);
+            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(((i * (3 + _settings.NumberOfPartitions)) + (j * 3) + 2) * sizeof(float)),
+                sizeof(float), ref newPosition.z);
         }
-        
 
         private void BuildNewSurface(Func<float, float, vec3> f, bool invertNormals)
         {
             ClearBuffers();
-            
+
             int steps = _settings.NumberOfPartitions;
 
             List<vec3> vertices = InitializeVertices(f);
@@ -47,17 +49,17 @@ namespace Common._3D_Objects
             List<vec3> normals = CalculateNormals(steps, steps, vertices, invertNormals ? -1 : 1);
             InitializeVAO_VBO_EBO(vertices, normals, indices);
         }
-        
+
         public void SetNewVertices(Func<float, float, vec3> f, bool invertNormals)
         {
-
             List<vec3> vertices = InitializeVertices(f);
             List<vec3> normals = CalculateNormals(_settings.NumberOfPartitions, _settings.NumberOfPartitions, vertices, invertNormals ? -1 : 1);
             float[] singleArray = vertices.ToSingleArray();
-            var normalsArray = normals.ToSingleArray();
+            float[] normalsArray = normals.ToSingleArray();
             vbo.Bind();
-            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(0), sizeof(float)*3*vertices.Count, singleArray);
-            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(sizeof(float)*3*vertices.Count), sizeof(float)*3*normals.Count, normalsArray);
+            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)0, sizeof(float) * 3 * vertices.Count, singleArray);
+            GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)(sizeof(float) * 3 * vertices.Count), sizeof(float) * 3 * normals.Count,
+                normalsArray);
         }
 
         public void SetNewVertices(Func<float, float, float> f, bool invertNormals)
@@ -67,7 +69,7 @@ namespace Common._3D_Objects
 
         private List<vec3> InitializeVertices(Func<float, float, vec3> f)
         {
-            List<vec3> vertices = new(_settings.NumberOfPartitions*_settings.NumberOfPartitions);
+            List<vec3> vertices = new(_settings.NumberOfPartitions * _settings.NumberOfPartitions);
             int steps = _settings.NumberOfPartitions;
             float tStep = (_settings.MaxX - _settings.MinX) / (steps - 1);
             float uStep = (_settings.MaxZ - _settings.MinZ) / (steps - 1);
@@ -89,8 +91,8 @@ namespace Common._3D_Objects
 
         private List<vec3> CalculateNormals(int height, int width, List<vec3> vertices, float inverted = 1)
         {
-            List<vec3> normals = new List<vec3>(vertices.Capacity);
-            
+            List<vec3> normals = new(vertices.Capacity);
+
             for (int i = 0; i < height; ++i)
             {
                 for (int j = 0; j < width; ++j)

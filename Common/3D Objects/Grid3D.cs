@@ -10,8 +10,9 @@ namespace Common._3D_Objects
 {
     public class Grid3D : SceneObject3D
     {
-        const string PARAMETRIC_FUNCTION_SHADER_FRAGMENT_PATH = @"Shaders\3D\parametricFunction.frag";
-        const string PARAMETRIC_FUNCTION_SHADER_VERTEX_PATH = @"Shaders\3D\parametricFunction.vert";
+        private const string PARAMETRIC_FUNCTION_SHADER_FRAGMENT_PATH = @"Shaders\3D\parametricFunction.frag";
+        private const string PARAMETRIC_FUNCTION_SHADER_VERTEX_PATH = @"Shaders\3D\parametricFunction.vert";
+
         public Grid3D(int horizontalDivisions, int verticalDivisions)
         {
             shader = new Shader(PARAMETRIC_FUNCTION_SHADER_VERTEX_PATH, PARAMETRIC_FUNCTION_SHADER_FRAGMENT_PATH);
@@ -30,7 +31,7 @@ namespace Common._3D_Objects
             float horizontalStep = (xMax - xMin) / (horizontalDivisions - 1);
             float verticalStep = (yMax - yMin) / (verticalDivisions - 1);
             float x = xMin;
-            for (int i = 0; i < horizontalDivisions+1; i++)
+            for (int i = 0; i < horizontalDivisions + 1; i++)
             {
                 vertices.Add(new vec3(x, 0, yMin));
                 vertices.Add(new vec3(x, 0, yMax));
@@ -40,7 +41,7 @@ namespace Common._3D_Objects
             }
 
             float y = yMin;
-            for (int i = 0; i < horizontalDivisions+1; i++)
+            for (int i = 0; i < horizontalDivisions + 1; i++)
             {
                 vertices.Add(new vec3(xMin, 0, y));
                 vertices.Add(new vec3(xMax, 0, y));

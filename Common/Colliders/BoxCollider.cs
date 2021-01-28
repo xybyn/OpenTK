@@ -9,16 +9,16 @@ namespace Common.Colliders
 {
     public class BoxCollider : Collider
     {
-        private List<PlaneCollider> _planeColliders = new List<PlaneCollider>();
+        private List<FinitePlaneCollider> _planeColliders = new ();
 
         public BoxCollider()
         {
-            _planeColliders.Add(new PlaneCollider(new vec3(0, 1, 0), new vec3(0, 0.5f, 0)));
-            _planeColliders.Add(new PlaneCollider(new vec3(0, -1, 0), new vec3(0, -0.5f, 0)));
-            _planeColliders.Add(new PlaneCollider(new vec3(1, 0, 0), new vec3(0.5f, 0, 0)));
-            _planeColliders.Add(new PlaneCollider(new vec3(-1, 0, 0), new vec3(-0.5f, 0, 0)));
-            _planeColliders.Add(new PlaneCollider(new vec3(0, 0, 1), new vec3(0, 0, 0.5f)));
-            _planeColliders.Add(new PlaneCollider(new vec3(0, 0, -1), new vec3(0, 0, -0.5f)));
+            _planeColliders.Add(new FinitePlaneCollider(new vec3(0, 1, 0), new vec3(0, 0.5f, 0)));
+            _planeColliders.Add(new FinitePlaneCollider(new vec3(0, -1, 0), new vec3(0, -0.5f, 0)));
+            _planeColliders.Add(new FinitePlaneCollider(new vec3(1, 0, 0), new vec3(0.5f, 0, 0)));
+            _planeColliders.Add(new FinitePlaneCollider(new vec3(-1, 0, 0), new vec3(-0.5f, 0, 0)));
+            _planeColliders.Add(new FinitePlaneCollider(new vec3(0, 0, 1), new vec3(0, 0, 0.5f)));
+            _planeColliders.Add(new FinitePlaneCollider(new vec3(0, 0, -1), new vec3(0, 0, -0.5f)));
 
             foreach (var planeCollider in _planeColliders)
             {
@@ -28,7 +28,7 @@ namespace Common.Colliders
 
         public override void Draw(ref mat4 view, ref mat4 projection)
         {
-            foreach (PlaneCollider planeCollider in _planeColliders)
+            foreach (var planeCollider in _planeColliders)
             {
                 planeCollider.Draw(ref view, ref projection);
             }
@@ -49,10 +49,10 @@ namespace Common.Colliders
                 result = null;
                 return false;
             }
-            var min = 
-                (from r in results 
-                orderby glm.dot(r.Point - rayOrigin, r.Point - rayOrigin) 
-                select r).First();
+            var min =
+                (from r in results
+                 orderby glm.dot(r.Point - rayOrigin, r.Point - rayOrigin)
+                 select r).First();
             result = min;
             return true;
         }

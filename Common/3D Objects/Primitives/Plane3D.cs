@@ -13,7 +13,8 @@ namespace Common
 
         public Plane3D(vec3 normal, vec3 d) : this(new Plane
         {
-            D = d, Normal = normal
+            D = d,
+            Normal = normal
         })
         {
         }
@@ -33,7 +34,7 @@ namespace Common
             float[] vertices = new[]
             {
                 -0.5f, 0, -0.5f,
-                0.5f, 0, -0.5f, 
+                0.5f, 0, -0.5f,
                 0.5f, 0, 0.5f,
                 -0.5f, 0, 0.5f
             };
@@ -49,6 +50,5 @@ namespace Common
 
             InitializeVAO_VBO_EBO(vertices, normals, indices);
         }
-        
     }
 }

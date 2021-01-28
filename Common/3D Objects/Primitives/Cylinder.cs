@@ -1,12 +1,9 @@
 ﻿// unset
 
 using Common._3D_Objects;
-using Common.Buffers;
-using GlmNet;
 using System.Collections.Generic;
 using System.Linq;
 using Utils;
-using static System.MathF;
 
 namespace Common
 {
@@ -14,6 +11,7 @@ namespace Common
     {
         private readonly List<float> _normals = new();
         private readonly List<float> _vertices = new();
+
         public Cylinder(float radius, float height, int sectorCount = 20)
         {
             List<float> unitVertices = AppUtils.GetCircle(1, sectorCount);
@@ -130,6 +128,5 @@ namespace Common
 
             InitializeVAO_VBO_EBO(_vertices.ToArray(), _normals.ToArray(), indices.ToArray());
         }
-
     }
 }

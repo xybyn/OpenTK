@@ -1,12 +1,8 @@
-﻿using Common._3D_Objects;
-using Common.Buffers;
-using Common.Colliders;
+﻿using Common.Colliders;
 using Common.Extensions;
 using Common.MathAbstractions;
 using Common.Misc;
-using Common.Shaders;
 using GlmNet;
-using OpenTK.Graphics.OpenGL4;
 using System;
 using System.Collections.Generic;
 
@@ -14,8 +10,6 @@ namespace Common.Drawers
 {
     public class Line3D : Collider
     {
-  
-
         public Line3D(Line line)
         {
             var vertices = new List<vec3>
