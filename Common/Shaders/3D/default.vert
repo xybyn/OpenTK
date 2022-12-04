@@ -23,5 +23,5 @@ void main()
         resultModel*
         vec4(position, 1.0);
     vertout_FragPos = vec3(resultModel*vec4(position, 1.0));
-    vertout_Normal = mat3(transpose(inverse(resultModel)))*a_Normal;
+    vertout_Normal = a_Normal;
 }

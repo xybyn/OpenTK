@@ -21,7 +21,7 @@ namespace Common.Windows
         protected override void OnLoad()
         {
             base.OnLoad();
-            GL.ClearColor(0.9f, 0.9f, 0.9f, 1.0f);
+            GL.ClearColor(1f, 1f,1f, 1.0f);
             GLFW.WindowHint(WindowHintInt.Samples, 16);
             GL.Enable(EnableCap.ProgramPointSize);
             GL.Enable(EnableCap.Multisample);

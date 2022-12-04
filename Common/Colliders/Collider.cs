@@ -13,7 +13,7 @@ namespace Common.Colliders
         public bool ShowColliders { get; set; } = true;
         private const string DEFAULT_COLLIDER_VERT_SHADER = @"Shaders\3D\collider.vert";
         private const string DEFAULT_COLLIDER_FRAG_SHADER = @"Shaders\3D\collider.frag";
-
+        public string Name { get; set; }
         protected Collider()
         {
             shader = new Shader(DEFAULT_COLLIDER_VERT_SHADER, DEFAULT_COLLIDER_FRAG_SHADER);

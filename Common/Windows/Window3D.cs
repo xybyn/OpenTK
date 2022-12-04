@@ -1,7 +1,9 @@
 ﻿using Common._3D_Objects;
 using Common.Interfaces;
 using GlmNet;
+using ImGuiNET;
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.ImGui;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
@@ -14,14 +16,15 @@ namespace Common.Windows
 {
     public abstract class Window3D : WindowBase
     {
-        private float _phi = -90;
-        private float _ksi = 0;
+        ImGuiController _controller;
+        private float _phi = 45;
+        private float _ksi = 45;
         protected mat4 projection;
         protected mat4 view;
         protected vec3 position;
         private Vector2 _lastPos;
-        private float _distanceToTarget = 10;
-        protected readonly List<SceneObject3D> toDraw = new();
+        private float _distanceToTarget = 20;
+        protected List<SceneObject3D> toDraw = new();
         private readonly List<IRayCasting> _rayCastings = new();
 
         private event Action<MouseMoveEventArgs, bool> OnMouseMoveEvent;
@@ -42,6 +45,12 @@ namespace Common.Windows
             toDraw.Add(mainAxis);
         }
 
+        protected override void OnResize(ResizeEventArgs e)
+        {
+            base.OnResize(e);
+            _controller.WindowResized(ClientSize.X, ClientSize.Y);
+            projection = glm.perspective(45f, ClientSize.X / (float)ClientSize.Y, 0.1f, 100f);
+        }
         protected void AddGrid(int horizontalDivisions = 20, int verticalDivisions = 20)
         {
             var grid = new Grid3D(horizontalDivisions, verticalDivisions)
@@ -58,7 +67,8 @@ namespace Common.Windows
         protected override void OnLoad()
         {
             base.OnLoad();
-            projection = glm.perspective(45f, 4f / 3f, 0.1f, 100f);
+            
+            _controller = new ImGuiController(ClientSize.X, ClientSize.Y);
         }
 
         protected override void OnMouseUp(MouseButtonEventArgs e)
@@ -116,20 +126,24 @@ namespace Common.Windows
 
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
-            _distanceToTarget = -e.OffsetY / 4 + 10;
+            _distanceToTarget = MathF.Max(-e.OffsetY / 4 + 20, 4);
             base.OnMouseWheel(e);
         }
 
         protected override void OnRenderFrame(FrameEventArgs args)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
+            _controller.Update(this, (float)args.Time);
             foreach (var d in toDraw)
             {
                 d.Draw(ref view, ref projection);
             }
+            //ImGui.ShowDemoWindow();
+
+            //_controller.Render();
             Context.SwapBuffers();
             base.OnRenderFrame(args);
+
         }
     }
 }

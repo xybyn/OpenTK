@@ -7,6 +7,7 @@
     <ItemGroup>
       <PackageReference Include="GlmNet" Version="0.7.0" />
       <PackageReference Include="OpenTK" Version="4.4.0" />
+      <PackageReference Include="OpenTK.ImGui" Version="1.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -56,7 +57,7 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="Shaders\3D\default.vert">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
       <None Update="Shaders\3D\collider.frag">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>

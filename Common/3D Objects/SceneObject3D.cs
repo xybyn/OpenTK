@@ -65,7 +65,7 @@ namespace Common._3D_Objects
         public virtual mat4 ParentModelWithoutRotation => Parent.ParentModelWithoutRotation * TranslationMatrix * ScalingMatrix;
         public Material Material { get; set; }
 
-        public bool ShowNormals { get; set; }
+        public virtual bool ShowNormals { get; set; }
 
         public IReadOnlyCollection<SceneObject3D> Children => _children;
 
@@ -221,9 +221,10 @@ namespace Common._3D_Objects
             shader.SetMat4("projection", ref projection);
         }
 
-        private void DrawNormals(ref mat4 view, ref mat4 projection)
+        public virtual void DrawNormals(ref mat4 view, ref mat4 projection)
         {
             mat4 model = Model;
+
             _normalsShader.Use();
             _normalsShader.SetMat4("projection", ref projection);
             _normalsShader.SetMat4("model", ref model);

@@ -77,7 +77,7 @@ namespace Common.Shaders
 
             GL.LinkProgram(_handle);
             string lof = GL.GetProgramInfoLog(_handle);
-            Console.WriteLine(lof);
+            // Console.WriteLine(lof);
             GL.DetachShader(_handle, _vertexShader);
             GL.DetachShader(_handle, _fragmentShader);
             GL.DeleteShader(_fragmentShader);
