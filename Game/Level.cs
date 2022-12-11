@@ -18,6 +18,7 @@ namespace Game
         protected List<AxisAlignedBoxCollider> colliders = new List<AxisAlignedBoxCollider>();
         protected List<SceneObject3D> toDraw = new List<SceneObject3D>();
         protected PipePath pipePath;
+        protected List<SphereCollider> sphereColliders = new List<SphereCollider>();
         protected void BuildGround()
         {
             groundBox = new Cube();
@@ -196,8 +197,15 @@ namespace Game
         {
             if (groundCollider.IsIntersectsRay(ray, position, out var result))
             {
-                _builder.AddPoint(result.Point);
+                foreach (var item in _builder.Points)
+                {
+                    vec3 diff = item - result.Point;
+                    if (glm.dot(diff, diff) < 0.1)
+                        return;
+                }
 
+                _builder.AddPoint(result.Point);
+        
                 if (_builder.Points.Count > 1)
                 {
                     for (int i = 0; i < _builder.Points.Count - 1; i++)
