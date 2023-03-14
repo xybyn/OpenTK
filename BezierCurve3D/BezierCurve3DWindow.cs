@@ -1,7 +1,7 @@
 ﻿// unset
 
 using Common;
-using Common._3D_Objects;
+using Common._3D_Objects.Primitives;
 using Common.Windows;
 using GlmNet;
 using OpenTK.Windowing.Desktop;
@@ -15,38 +15,36 @@ namespace BezierCurve
         public BezierCurve3DWindow(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
             : base(gameWindowSettings, nativeWindowSettings)
         {
-            var pipe = new Pipe(() =>
+
+            var result = new List<vec3>();
+            var points = new List<vec3>();
+            points.Add(new vec3(-4, 0, 1));
+            points.Add(new vec3(8, 8, 0));
+            points.Add(new vec3(-8, 8, 0));
+            points.Add(new vec3(4, 0, -1));
+
+            foreach (var point in points)
             {
-                var result = new List<vec3>();
-                var points = new List<vec3>();
-                points.Add(new vec3(-4, 0, 1));
-                points.Add(new vec3(8, 8, 0));
-                points.Add(new vec3(-8, 8, 0));
-                points.Add(new vec3(4, 0, -1));
+                var point3D = new Sphere(0.2f);
+                point3D.TranslateWorld(point);
+                point3D.Material.Color = new vec3(0.7f, 0, 0);
+                toDraw.Add(point3D);
+            }
 
-                foreach (var point in points)
-                {
-                    var point3D = new Sphere(0.2f);
-                    point3D.TranslateWorld(point);
-                    point3D.Material.Color = new vec3(0.7f, 0, 0);
-                    toDraw.Add(point3D);
-                }
+            var divisions = 100;
+            var step = 1 / (float)(divisions - 1);
+            float t = 0;
+            for (int i = 0; i < divisions; i++)
+            {
+                result.Add(AppUtils.Bezier(t, points));
+                t += step;
+            }
 
-                var divisions = 100;
-                var step = 1 / (float)(divisions - 1);
-                float t = 0;
-                for (int i = 0; i < divisions; i++)
-                {
-                    result.Add(AppUtils.Bezier(t, points));
-                    t += step;
-                }
-                return result;
-            });
-            pipe.Material.Color = new vec3(0.7f);
+            Lines lines = new Lines(result);
 
             AddMainCoordinatesAxis();
             AddGrid();
-            toDraw.Add(pipe);
+            toDraw.Add(lines);
         }
     }
 }
